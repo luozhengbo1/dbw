@@ -1,0 +1,51 @@
+<div class="layui-side layui-bg-black">
+	<div class="layui-side-scroll">
+		<!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+		<ul class="layui-nav layui-nav-tree"  lay-filter="test">
+			<li class="layui-nav-item">
+				<a href="{:U('Shop/index')}">店铺管理</a>
+			</li>
+			<li class="layui-nav-item">
+				<a href="javascript:;">菜品管理</a>
+				<dl class="layui-nav-child">
+					<dd><a data-href="{:U('FoodClass/index')}" data-title="类型设置" data-icon="fa-cutlery">类型设置</a></dd>
+					<dd><a href="{:U('Food/index')}">食品列表</a></dd>
+				</dl>
+			</li>
+			<li class="layui-nav-item">
+				<a href="{:U('Area/index')}">区域/场景管理</a>
+			</li>
+			<li class="layui-nav-item">
+				<a class="" href="{:U('Ap/index')}">AP管理</a>
+			</li>
+			<li class="layui-nav-item">
+				<a href="{:U('AdPosition/index')}">上刊广告位管理</a>
+			</li>
+			<li class="layui-nav-item">
+				<a href="{:U('AdType/index')}">上刊类型管理</a>
+			</li>
+			<li class="layui-nav-item">
+				<a href="{:U('User/index')}">用户管理</a>
+			</li>
+		</ul>
+	</div>
+</div>
+<script>
+    //JavaScript代码区域
+    layui.use('element', function(){
+        var $ = layui.jquery;
+        $('.layui-nav-item a').on('click', function () {
+
+            $(this).each(function(){
+
+                window.parent.tab.tabAdd({
+                    href: $(this).attr('data-href'),
+                    icon: $(this).attr('data-icon'),
+                    title: $(this).attr('data-title')
+                });
+            });
+
+        });
+
+    });
+</script>

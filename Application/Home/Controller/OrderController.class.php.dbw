@@ -1,0 +1,134 @@
+<?php
+namespace Home\Controller;
+use Home\Controller\CommonController;
+class OrderController extends CommonController
+{
+
+	public function orderDetail(){
+    
+		$id = I('id','');
+		if($id != ''){
+			
+			$condition['id'] = intval($id);
+			$Order = D('Order');
+			//$Record = M('record');	
+			$orderList = $Order->where($condition)->order('id desc')->relation(true)->find();
+			/*foreach($orderList as $value){
+				$map['order_id'] = intval($orderList['id']);
+				$orderList['food_items'] = $Record->where($map)->select();
+
+			}*/					
+
+			$this->assign('orderList',$orderList);
+			
+		}
+		
+		$this->display();
+
+
+	}
+    public function orderList($pageNum='1',$pageSize='15'){
+
+		$pageNum = intval($pageNum);
+		$pageSize = intval($pageSize);
+		
+		$startTime = I('startTime',date("Y-m-d",time()).' 00:00:00');
+		$endTime = I('endTime',date("Y-m-d",time()).' 23:59:59');
+		
+		$startTime = strpos($endTime,'+') !== false ? str_replace('+', ' ', $startTime) : $startTime;
+		$endTime = strpos($endTime,'+') !== false ? str_replace('+', ' ', $endTime) : $endTime;
+		
+		$type = I('type','');
+		$foodType = I('food_type','');		
+		!empty($type) && $condition['type'] = $type;
+		!empty($foodType) && $condition['food_type'] = $foodType;
+		$condition['add_time']= array(array('EGT',$startTime),array('ELT',$endTime));
+		$start = ($pageNum-1) * $pageSize;
+		
+		
+		
+
+		$Order = D('Order');
+		$orderList = $Order->where($condition)->order('id desc')->limit($start,$pageSize)->relation(true)->select();
+
+		
+		//$Record = M('record');
+		//$orderList = $Order->where($condition)->field('id,order_no,pnum,pname,department,feecode,gid,type,amount,status,food_take,food_type,pay_id,pay_type,pay_time,add_time')->order('id desc')->limit($start,$pageSize)->select();
+
+		
+		$pageCount = intval(ceil($Order->where($condition)->count()/$pageSize));
+		$amount = $Order->where($condition)->getField('SUM(amount) AS amount');
+		/*foreach($orderList as &$value){
+			$map['order_id'] = intval($value['id']);
+			$value['food_items'] = $Record->where($map)->select();
+
+		}*/
+
+		//搜索参数
+		$params = array(
+			'type' => $type,
+			'food_type' => $foodType,
+			'startTime' => $startTime,
+			'endTime' => $endTime,
+		);
+
+		//需要显示的页码
+		$showPage = setShowPage( 3 ,$pageNum, $pageCount);		
+		$pageList = setPageList($showPage,$pageNum,$pageSize,$pageCount,$params);
+		
+
+		//需要显示的页码
+		$Type = M('type');
+		$typeList = $Type->field('id,title')->select();		
+		$this->assign('typeList',$typeList);		
+		$this->assign('orderList',$orderList);
+		$this->assign('pageList',$pageList);
+		$this->assign('params',$params);
+		$this->assign('amount',$amount);	
+        $this->display();
+    }
+	
+	public function downExcel(){
+		header("X-Frame-Options: DENY");//加载空白
+		$startTime = I('startTime',date("Y-m-d",time()).' 00:00:00');
+		$endTime = I('endTime',date("Y-m-d",time()).' 23:59:59');
+		
+		$startTime = strpos($endTime,'+') !== false ? str_replace('+', ' ', $startTime) : $startTime;
+		$endTime = strpos($endTime,'+') !== false ? str_replace('+', ' ', $endTime) : $endTime;
+		
+		$type = I('type','');
+		$foodType = I('food_type','');		
+		!empty($type) && $condition['type'] = $type;
+		!empty($foodType) && $condition['food_type'] = $foodType;
+		$condition['add_time']= array(array('EGT',$startTime),array('ELT',$endTime));
+		$start = ($pageNum-1) * $pageSize;
+		$Order = M('order');	
+		$Record = M('record');
+		$orderList = $Order->where($condition)->field('id,order_no,pnum,pname,department,feecode,gid,type,amount,status,food_take,food_type,pay_type,pay_time,add_time,devid')->order('id desc')->select();
+		foreach($orderList as &$value){
+			$map['order_id'] = intval($value['id']);
+			$value['food_items'] = $Record->where($map)->select();
+			$value['status'] = $value['status'] == 1 ? '已支付' : '未支付';
+			$value['food_take'] = $value['food_take'] == 1 ? '已取' : '未取';			
+			switch($value['pay_type']){
+				case 0:
+					$value['pay_type'] = '刷厂牌';
+					break;
+				case 1:
+					$value['pay_type'] = '现金';
+					break;
+				case 2:
+					$value['pay_type'] = '微信';
+					break;
+				case 3:
+					$value['pay_type'] = '支付宝';
+					break;
+			}
+			unset($value['id']);
+		}		
+
+		$orderList = array_merge(array(array('订单号','工号','姓名','部门','费用代码','gid','类型','金额','状态','取餐','用餐类型','支付方式','付款时间','创建时间','刷卡设备','菜品 x 数量')),$orderList);
+		outExcelForOrder($orderList);		
+	
+	}
+}

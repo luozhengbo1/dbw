@@ -1,0 +1,38 @@
+<div class="expand-cart-main">
+    <div class="expand-cart-header of"><strong class="expand-cart-title">购物车</strong>
+        <button class="expand-cart-clear">清空购物车</button>
+    </div>
+    <volist name="buyList" id="vo">
+        <div class="cart-ordered-list">
+            <div class="cart-ordered-dish">
+                <div class="ordered-dish">
+                    <span class="dish-name">{$vo.name}</span>
+                    <span class="dish-item-price">
+                           <span class="dish-item-price-number dish-item-price-nosub price">{$vo.price}</span>
+                    </span>
+                    <div class="counter counter-min--nonum">
+                        <a class="counter-minus" <if condition="$vo.num eq 0">style="display:none;"</if> data-id="{$vo.id}"><span class="counter-click-mask"></span></a>
+                        <span class="counter-num" style="min-width: 35px; z-index: 11;"><if condition="$vo.num gt 0">{$vo.num}</if></span>
+                        <a class="counter-add" data-id="{$vo.id}"><span class="counter-click-mask"></span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </volist>
+
+    <div class="tiny-cart">
+        <div class="tiny-cart-left">
+            <button class="cart-icon cart-icon--tiny"
+                    style="z-index: 5; border: 3px solid rgb(64, 64, 64);"><img
+                    src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+Cjxzdmcgd2lkdGg9IjU0cHgiIGhlaWdodD0iNTRweCIgdmlld0JveD0iMCAwIDU0IDU0IiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPgogICAgPCEtLSBHZW5lcmF0b3I6IFNrZXRjaCA0MCAoMzM3NjIpIC0gaHR0cDovL3d3dy5ib2hlbWlhbmNvZGluZy5jb20vc2tldGNoIC0tPgogICAgPHRpdGxlPui0reeJqei9pjwvdGl0bGU+CiAgICA8ZGVzYz5DcmVhdGVkIHdpdGggU2tldGNoLjwvZGVzYz4KICAgIDxkZWZzPjwvZGVmcz4KICAgIDxnIGlkPSJQYWdlLTEiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPgogICAgICAgIDxnIGlkPSLngrnppJDpobUyIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNDcuMDAwMDAwLCAtMTUyNS4wMDAwMDApIiBmaWxsPSIjRkZGRkZGIj4KICAgICAgICAgICAgPGcgaWQ9Iui0reeJqei9puagjy1jb3B5IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwLjAwMDAwMCwgMTQ4OC4wMDAwMDApIj4KICAgICAgICAgICAgICAgIDxnIGlkPSLotK3nianovaYiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIwLjAwMDAwMCwgNy4wMDAwMDApIj4KICAgICAgICAgICAgICAgICAgICA8cGF0aCBkPSJNNDQuMzM3NzkyNiw3Ni4yNzQxNDI5IEM0Mi4yMDkwOTcsNzYuMjc0MTQyOSA0MC40ODQ5NDk4LDc4LjAwMDIxNDMgNDAuNDg0OTQ5OCw4MC4xMzEyODU3IEM0MC40ODQ5NDk4LDgyLjI2MjM1NzEgNDIuMjA5MDk3LDgzLjk4ODQyODYgNDQuMzM3NzkyNiw4My45ODg0Mjg2IEM0Ni40NjY0ODgzLDgzLjk4ODQyODYgNDguMTkwNjM1NSw4Mi4yNjIzNTcxIDQ4LjE5MDYzNTUsODAuMTMxMjg1NyBDNDguMTkwNjM1NSw3OC4wMDAyMTQzIDQ2LjQ2ODQxNDcsNzYuMjc0MTQyOSA0NC4zMzc3OTI2LDc2LjI3NDE0MjkgTDQ0LjMzNzc5MjYsNzYuMjc0MTQyOSBMNDQuMzM3NzkyNiw3Ni4yNzQxNDI5IFogTTcxLjMwNzY5MjMsNzYuMjc0MTQyOSBDNjkuMTc4OTk2Nyw3Ni4yNzQxNDI5IDY3LjQ1NDg0OTUsNzguMDAwMjE0MyA2Ny40NTQ4NDk1LDgwLjEzMTI4NTcgQzY3LjQ1NDg0OTUsODIuMjYyMzU3MSA2OS4xNzg5OTY3LDgzLjk4ODQyODYgNzEuMzA3NjkyMyw4My45ODg0Mjg2IEM3My40MzYzODgsODMuOTg4NDI4NiA3NS4xNjA1MzUxLDgyLjI2MjM1NzEgNzUuMTYwNTM1MSw4MC4xMzEyODU3IEM3NS4xNjA1MzUxLDc4LjAwMDIxNDMgNzMuNDM4MzE0NCw3Ni4yNzQxNDI5IDcxLjMwNzY5MjMsNzYuMjc0MTQyOSBMNzEuMzA3NjkyMyw3Ni4yNzQxNDI5IEw3MS4zMDc2OTIzLDc2LjI3NDE0MjkgWiBNNzkuNTEyMzIxMSwzNy41MDIxNDI5IEM3OC41Mjc5MTk3LDM2LjM4OTM1NzEgNzcuMTc1NTcxOSwzNS43ODU3MTQzIDc1LjcwMzc4NiwzNS43ODU3MTQzIEwzNy4xMDQwODAzLDM1Ljc4NTcxNDMgTDM2Ljk2NzMwNDMsMzUuMDAwNzg1NyBDMzYuNjMwMTgwNiwzMi4xOTQ3MTQzIDM0LjE2MjQzNDgsMzAgMzEuMzQ5ODU5NSwzMCBMMjguOTI2NDIxNCwzMCBDMjcuODYxMTEwNCwzMCAyNywzMC44NjIwNzE0IDI3LDMxLjkyODU3MTQgQzI3LDMyLjk5NTA3MTQgMjcuODYxMTEwNCwzMy44NTcxNDI5IDI4LjkyNjQyMTQsMzMuODU3MTQyOSBMMzEuMzQ5ODU5NSwzMy44NTcxNDI5IEMzMi4xODc4NTI4LDMzLjg1NzE0MjkgMzMuMDQzMTgzOSwzNC42MjA4NTcxIDMzLjE1Njg0MjgsMzUuNTYwMDcxNCBMMzUuMDE3NzY1OSw0Ni4zMTc2NDI5IEwzOC4yODQ5NzY2LDY5LjM0NjcxNDMgQzM4LjYyNDAyNjgsNzIuMTUyNzg1NyA0MS4wNjQ4MDI3LDc0LjM1NzE0MjkgNDMuODQwNzc1OSw3NC4zNTcxNDI5IEw3NS4xNjA1MzUxLDc0LjM1NzE0MjkgQzc2LjIyNTg0NjIsNzQuMzU3MTQyOSA3Ny4wODY5NTY1LDczLjQ5NTA3MTQgNzcuMDg2OTU2NSw3Mi40Mjg1NzE0IEM3Ny4wODY5NTY1LDcxLjM2MjA3MTQgNzYuMjI1ODQ2Miw3MC41IDc1LjE2MDUzNTEsNzAuNSBMNDMuODQwNzc1OSw3MC41IEM0My4wMjAxMjA0LDcwLjUgNDIuMjEyOTQ5OCw2OS43NDAxNDI5IDQyLjEwNTA3MDIsNjguODQ1Mjg1NyBMNDEuNzg1Mjg0Myw2Ni41OTQ2NDI5IEw3Mi4zNDk4ODYzLDY0LjcwMjcxNDMgQzc1LjEyMzkzMzEsNjQuNzAyNzE0MyA3Ny41NjQ3MDksNjIuNTAyMjE0MyA3Ny44OTIyMDA3LDU5Ljc5ODM1NzEgTDgwLjkyODI0MDgsNDIuNDIgQzgxLjE1MzYzMjEsNDAuNTYyNzg1NyA4MC42MzczNTEyLDM4Ljc3MzA3MTQgNzkuNTEyMzIxMSwzNy41MDIxNDI5IEw3OS41MTIzMjExLDM3LjUwMjE0MjkgWiI+PC9wYXRoPgogICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICA8L2c+CiAgICAgICAgPC9nPgogICAgPC9nPgo8L3N2Zz4="
+                    alt="" style="width: 27px; height: 27px;"></button>
+            <if condition="$value elt 0">
+                <span class="tiny-cart-text money">购物车是空的</span> <else />
+                <span class="tiny-cart-price price noShipmentFee moneyTotal money">{$value}</span>
+            </if>
+        </div>
+        <div class="tiny-cart-right">
+        </div>
+    </div>
+
+</div>

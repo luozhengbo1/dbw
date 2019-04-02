@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>微信点餐V1.0</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="__PUBLIC__/plugins/jquery-weui/css/gobal.css">
+    <link rel="stylesheet" href="__PUBLIC__/plugins/jquery-weui/lib/weui.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/plugins/jquery-weui/css/jquery-weui.css">
+    <link rel="stylesheet" href="__PUBLIC__/index/css/themeV1.0.css">
+
+</head>
+<body ontouchstart>
+<div class="foodShow">
+    <div class="dish-detail-container dish-desc-container">
+        <div class="dish-detail-close">
+            <a class="btn-close" onclick="closeFoodShow(this)"></a>
+        </div>
+        <div class="dish-detail-content dish-detail-content--white">
+            <div class="dish-desc-content">
+                <div class="dish-desc-image"><img src="" alt="洋芋丝炒饭">
+                </div>
+                <div class="dish-desc-info">
+                    <h2 class="dish-desc-title">{$shop.name}</h2>
+                    <div class="dish-desc-price-container">
+                        <span class="dish-desc-price--bold price">8</span>
+                        <div class="counter counter-min--nonum">
+                            <a class="counter-minus"><span class="counter-click-mask"></span></a>
+                            <span class="counter-num" style="min-width: 35px; z-index: 11;">0</span>
+                            <a class="counter-add"><span class="counter-click-mask"></span></a></div>
+                    </div>
+                    <h3 class="dish-desc-subtitle">美食简介</h3>
+                    <textarea class="dish-desc-desc">
+                        暂无XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+                        XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx</textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+<script src="__PUBLIC__/plugins/jquery-weui/lib/jquery-2.1.4.js"></script>
+<script src="__PUBLIC__/plugins/jquery-weui/lib/fastclick.js"></script>
+<script>
+    $(function () {
+        FastClick.attach(document.body);
+        sure = "{:U('Car/sure', array('shop_id' => $shop['id'], 'table_number' => $Think.get.table_number))}";
+        shop_id = "{$shop['id']}";
+        value = "{{$value}";
+        // 点击获取食品列表
+        $(".dish-type-list li").on("click", function () {
+            var class_id = $(this).attr('data-classid');
+            $.ajax({
+                type: "post",
+                url:  "{:U('Food/lists')}",
+                data: {"class_id":class_id, shop_id:shop_id},
+                cache: false,
+                async : false,
+                dataType: "json",
+                success: function (data ,textStatus, jqXHR)
+                {
+                    $(".dish-list").html("");
+                    $(".dish-list").append(data);
+                },
+                error:function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert("请求失败！");
+                }
+            });
+        });
+    });
+</script>
+<script src="__PUBLIC__/plugins/jquery-weui/js/jquery-weui.js"></script>
+<script src="__PUBLIC__/index/js/action.js"></script>
+<script>
+</script>
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>{:C('WEB_TITLE')}</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="stylesheet" href="__PUBLIC__/plugins/layui/css/layui.css" media="all" />
+    <link rel="stylesheet" href="__PUBLIC__/css/global.css" media="all">
+    <link rel="stylesheet" href="__PUBLIC__/plugins/font-awesome/css/font-awesome.min.css">
+</head>
+
+<body>
+<div style="margin: 15px;">
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+        <legend>修改店铺信息</legend>
+    </fieldset>
+
+    <form class="layui-form" action="{:U('Shop/edit')}" method="post">
+        <div class="layui-form-item">
+            <label class="layui-form-label"><i class="layui-color-danger">*</i> 名称：</label>
+            <div class="layui-input-inline">
+                <input type="text" name="name" lay-verify="name" value="{$data.name}" class="layui-input" autocomplete="off" placeholder="请输入名称" >
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"><i class="layui-color-danger">*</i> 店铺类型：</label>
+            <div class="layui-input-inline">
+                <select name="class_id" lay-verify="status">
+                    <volist name="shopClass" id="vo">
+                        <option value="{$vo.id}" <if condition="$vo['id'] eq $data['class_id']">selected</if> >{$vo.name}</option>
+                    </volist>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"><i class="layui-color-danger">*</i> 支持的就餐方式：</label>
+            <div class="layui-input-inline">
+                <select name="eat_type" lay-verify="status">
+                    <option value="12" <if condition="$data.eat_type eq 12">selected</if> >堂食+外带</option>
+                    <option value="1" <if condition="$data.eat_type eq 1">selected</if> >堂食</option>
+                    <option value="2" <if condition="$data.eat_type eq 2">selected</if> >外带</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"><i class="layui-color-danger">*</i> 所属商家：</label>
+            <div class="layui-input-inline">
+                <select name="merchant_id" lay-verify="status">
+                    <volist name="merchant" id="vo">
+                        <option value="{$vo.id}" <if condition="$data['merchant_id'] eq $vo['id']">selected</if> >{$vo.name}</option>
+                    </volist>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item" style="overflow:hidden">
+            <label class="layui-form-label">LOGO：</label>
+            <div class="layui-input-block thumb-preview">
+                <img src="{$data.logo}" id="logo">
+                <div class="material-form-item">
+                    <div class="material-item-inline"><input type="text" name="logo"  lay-verify="thumb" autocomplete="off" placeholder="请选择封面" class="layui-input" value="{$data.logo}" readonly></div>
+                    <button type="button" class="layui-btn" id="uploadBtn">
+                        <i class="layui-icon">&#xe67c;</i>上传图片
+                    </button>
+                    <div class="layui-form-mid layui-word-aux" style="float:none;">注:上传图片为.jpg、.gif、.png、.jpeg格式，大小不超过10M</div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"><i class="layui-color-danger">*</i> 地址：</label>
+            <div class="layui-input-inline">
+                <input type="text" name="address" lay-verify="name" value="{$data.address}" class="layui-input" autocomplete="off" placeholder="请输入店铺地址" >
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"><i class="layui-color-danger">*</i> 联系方式：</label>
+            <div class="layui-input-inline">
+                <input type="text" name="tel" value="{$data.tel}" class="layui-input"  placeholder="店铺联系方式" >
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"><i class="layui-color-danger">*</i> 营业时间：</label>
+            <div class="layui-input-inline">
+                <input type="text" name="open_time" lay-verify="name" value="{$data.open_time}" class="layui-input open_time" onclick="this.blur()" >
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"><i class="layui-color-danger">*</i> 状态：</label>
+            <div class="layui-input-inline">
+                <select name="status" lay-verify="status">
+                    <option value="on" <if condition="$data.status eq on">selected</if> >营业中</option>
+                    <option value="off" <if condition="$data.status eq off">selected</if>>打烊了</option>
+                </select>
+            </div>
+        </div>
+        <input type="hidden" name="id" value="{$data.id}">
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">备注：</label>
+            <div class="layui-input-block">
+                <textarea name="remark"  id="note" class="layui-textarea" placeholder="请输入内容">{$data.remark}</textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit="" lay-filter="subBtn">立即提交</button>
+                <a href="{:U('Shop/lists')}" class="layui-btn layui-btn-primary">返回</a>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="__PUBLIC__/plugins/layui/layui.js"></script>
+<script>
+    layui.use(['form','upload','laydate'], function() {
+        var form = layui.form,
+            layer = layui.layer,
+            upload = layui.upload,
+            laydate = layui.laydate,
+            $ = layui.jquery;
+//同时绑定多个
+        lay('.open_time').each(function(){
+            laydate.render({
+                elem: this
+                ,trigger: 'click'
+                ,type: 'time'
+                ,range: true
+            });
+        });
+
+        upload.render({
+            elem:'#uploadBtn',
+            url: '{:U('Food/uploadFoodThumb')}',
+            ext: 'jpg|gif|png|jpeg',
+            method: 'post',
+            done: function(data){
+            layer.alert(data.msg, {
+                title : '提示',
+                icon : data.code,
+            });
+            if(data.code == 1){
+
+                $('#logo').attr('src',data.data);
+                $("input[name='logo']").attr('value',data.data);
+
+            }
+
+
+        },
+        error: function(){
+            layer.alert('上传接口失败！', {
+                title : '提示',
+                icon : data.code,
+            });
+        }
+    });
+
+        //自定义验证规则
+        form.verify({
+
+            name: function(value, item){
+                if(value.length < 1 || /^\s+$/.test(value)){
+                    return '名称不能少于1个字符！';
+                }
+            },
+            thumb: function(value, item){
+                if(value.length < 1){
+                    return '请至少上传一幅封面！';
+                }
+            },
+            type_id: function(value, item){
+                if(value.length < 1){
+                    return '请至少选择一种类型！';
+                }
+            },
+            price: [/^\d+(\.\d+)?$/, '价格必须是数字！'],
+            gp_id: function(value, item){
+                if(value.length < 1){
+                    return '请至少选择一家餐商！';
+                }
+            },
+        });
+    });
+</script>
+</body>
+
+</html>

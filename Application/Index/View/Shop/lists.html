@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{:C('WEB_TITLE')}</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="__PUBLIC__/plugins/jquery-weui/css/gobal.css">
+    <link rel="stylesheet" href="__PUBLIC__/plugins/jquery-weui/lib/weui.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/plugins/jquery-weui/css/jquery-weui.css">
+    <link rel="stylesheet" href="__PUBLIC__/index/css/themeV1.0.css">
+</head>
+<body ontouchstart>
+<include file="Public/ServerConf"/>
+<div id="app-placeholder" class="transparent-container">
+    <div data-reactroot="" class="o-bg-grey shop-list-wm showTab" style="height: 100%; overflow: auto;">
+        <div>
+            <div class="o-flex c-tabs">
+                <a href="{:U('Shop/lists/eat_type/1')}" class="o-flex__fluid c-tabs__item <if condition='$Think.get.eat_type eq 1'>c-tabs__item--active</if>"><span>堂食</span></a>
+                <a href="{:U('Shop/lists/eat_type/2')}" class="o-flex__fluid c-tabs__item <if condition='$Think.get.eat_type eq 2'>c-tabs__item--active</if>"><span>外卖</span></a>
+            </div>
+
+            <!--
+            <ul class="o-list o-border--top o-border--bottom navi-entry">
+                <li class="o-list__item c-option">
+                    <div class="c-option__title-icon"><i class="title-icon"></i></div>
+                    <div class="c-option__body"><span
+                            class="o-text-ellipsis o-tc--tertiary o-tc--medium">定位失败，请手动选择地址</span></div>
+                    <div class="c-option__ending"><i class="o-icon-arrow--right"></i></div>
+                </li>
+            </ul>
+            -->
+            <div class="shop-all-outer">
+                <div class="searchws">
+                    <div class="o-flex addrselect-header"><span class="city-select">贵阳</span>
+                        <label class="o-flex__fluid addrselect-searchbox is-empty">
+                            <div class="of">
+                                <input type="hidden" id="eat_type" value="{$Think.get.eat_type}">
+                                <input type="text" name="name" class="addrselect-search-input" value="{$Think.post.name}" placeholder="请输入门店" maxlength="30" oninput="shopCheck(this)">
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+             <!--
+                <div class="searchzt hide">
+                    <div class="o-flex addrselect-header"><span class="city-select">附近门店</span>
+                        <label class="o-flex__fluid addrselect-searchbox is-empty">
+                            <div class="of"><input type="text" class="addrselect-search-input" placeholder="请输入门店" maxlength="30"></div>
+                        </label>
+                    </div>
+                </div>
+             -->
+
+                <div class="shop-all">
+                    <div class="record" style="transform: translate(0px, 0px) translateZ(0px);">
+                        <div>
+                            <!--<div class="inout-shop-title o-bg-grey">以下门店不在配送范围内</div>-->
+                            <div class="shop-list-outer">
+                                <ul class="o-list o-border--top o-border--bottom">
+                                    <php>
+                                        $eatType = $_GET['eat_type'];
+                                    </php>
+                                    <volist name="lists" id="vo">
+                                        <!--<a href="{:U('Shop/shop', array('shop_id' => $vo['id']))}-->
+                                        <a href="{:U('FoodClass/lists', array('shop_id' => $vo['id'], 'eat_type' => $eatType))}">
+                                            <li class="o-list__item c-shop-entry">
+                                                <div class="o-media">
+                                                    <img class="o-media__img c-shop-entry__img" src="{$vo.logo}" alt="{$vo.name}">
+                                                    <div class="o-media__body c-description">
+                                                        <div class="c-description__title">
+                                                            <div class="o-text-ellipsis">{$vo.name}</div>
+                                                        </div>
+                                                        <div class="c-description__body c-shop-entry__meta">
+                                                            <p class="c-shop-entry__name">
+                                                                <span class="brand-shop__menu-condition"><eq name="vo.status" value="on"><i class="fl icon-color">{$vo.status_cn}</i><else/><i class="fl">{$vo.status_cn}</i></eq><span>{$vo.class_id}</span></span>
+                                                            </p>
+                                                            <span>≤500km</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </a>
+                                    </volist>
+                                    <div class="weui-loadmore">
+                                        <i class="weui-loading"></i>
+                                        <span class="weui-loadmore__tips">正在加载</span>
+                                    </div>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--导航菜单-->
+<div class="navin">
+    <div class="floating-nav-container" style="z-index: 99">
+        <div class="nav-items">
+            <div class="item"><a href="{:U('shop/index')}"><i class="icon icon-menu"></i>首页</a></div>
+            <div class="item"><a href="{:U('Customer/lists')}"><i class="icon icon-personal"></i>个人中心</a></div>
+            <div class="item"><a href="{:U('Shop/lists/eat_type/1')}"><i class="icon icon-card"></i>堂食</a></div>
+            <div class="item"><a href="{:U('Shop/lists/eat_type/2')}"><i class="icon icon-order-list"></i>外带</a></div>
+        </div>
+        <div class="expand-control">
+            <button style="z-index: 100"><span class="navText">快速导航</span><i class="icon iconI icon-double-arrow-right"></i></button>
+        </div>
+    </div>
+</div>
+</body>
+<script src="__PUBLIC__/plugins/jquery-weui/lib/jquery-2.1.4.js"></script>
+<script src="__PUBLIC__/plugins/jquery-weui/lib/fastclick.js"></script>
+<script>
+    $(function() {
+        FastClick.attach(document.body);
+    });
+</script>
+<script src="__PUBLIC__/plugins/jquery-weui/js/jquery-weui.js"></script>
+<script src="__PUBLIC__/index/js/action.js"></script>
+<script>
+    $(function () {
+        FastClick.attach(document.body);
+        shop_id = "{$shop['id']}";
+        value = "{{$value}";
+        // 点击获取食品列表
+        var type={$Think.get.eat_type};
+        iniFnite("Shop/lists",type);  //动态加载
+    });
+
+</script>
+</body>
+</html>

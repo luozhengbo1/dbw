@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>微信点餐V1.0</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="__PUBLIC__/plugins/jquery-weui/css/gobal.css">
+    <link rel="stylesheet" href="__PUBLIC__/plugins/jquery-weui/lib/weui.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/plugins/jquery-weui/css/jquery-weui.css">
+
+    <link rel="stylesheet" href="__PUBLIC__/index/css/themeV1.0.css">
+
+</head>
+<body ontouchstart>
+<div id="app-placeholder" class="transparent">
+    <!--头部信息-->
+    <div class="dish-menu" style="display: none">
+        <div class="register notice">
+            <a href="javascript:history.back(-1)">返回</a>
+            <p>泛亚微信点餐V1.0</p>
+        </div>
+    </div>
+
+    <!--商店是否打样-->
+    <!--<if condition="$shop.status eq 'off'">-->
+        <!--<div class="shopStatus">-->
+            <!--<div class="dish-menu-main">-->
+                <!--<div class="dish-mesthead">-->
+                    <!--<div class="dish-mesthead-opendialog">-->
+                        <!--<div class="modal">-->
+                            <!--<div class="mask"></div>-->
+                            <!--<div class="dialog sliver message-dialog">-->
+                                <!--<div class="dialog-header"><p class="dialog-title"></p>-->
+                                    <!--<button class="btn dialog-btn-close"></button>-->
+                                <!--</div>-->
+                                <!--<div class="dialog-body" style="max-height: 841px;">-->
+                                    <!--<img class="shopopen-img" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIxIiBoZWlnaHQ9IjIxNyIgdmlld0JveD0iMCAwIDMyMSAyMTciIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPjx0aXRsZT7mnKrokKXkuJogY29weTwvdGl0bGU+PGRlZnM+PHBhdGggZD0iTTE3MS44IDg1TDEyNCAxNEMxMTUgLjYgMTAwLjYuNiA5MS42IDE0TDQzLjggODUiIGlkPSJhIi8+PG1hc2sgaWQ9ImIiIHg9IjAiIHk9IjAiIHdpZHRoPSIxMjgiIGhlaWdodD0iODEiIGZpbGw9IiNmZmYiPjx1c2UgeGxpbms6aHJlZj0iI2EiLz48L21hc2s+PC9kZWZzPjxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+PHBhdGggZD0iTS0xLTQuMmgzMzBWMjIwSC0xeiIvPjxnIHRyYW5zZm9ybT0icm90YXRlKDUgMTMwLjkzNiA3MjQuODc2KSI+PHJlY3QgZmlsbD0iI0E3Nzc2MyIgeD0iLjEiIHk9Ijg4LjMiIHdpZHRoPSIyMTUuNiIgaGVpZ2h0PSIxMDYuMyIgcng9IjIwIi8+PHJlY3QgZmlsbD0iIzg3NTMzRiIgeD0iLjEiIHk9Ijg4LjMiIHdpZHRoPSIyMTUuNiIgaGVpZ2h0PSIxMDAuMiIgcng9IjIwIi8+PHVzZSBzdHJva2U9IiM4QzUzM0YiIG1hc2s9InVybCgjYikiIHN0cm9rZS13aWR0aD0iMTAiIHN0cm9rZS1saW5lY2FwPSJzcXVhcmUiIHN0cm9rZS1kYXNoYXJyYXk9IjUsOCIgeGxpbms6aHJlZj0iI2EiLz48cGF0aCBkPSJNMjMuOCAxNDAuNWMwIDIuMi4zIDQgMSA1LjguNiAxLjYgMS41IDMgMi42IDQuMiAxIDEuMiAyLjQgMiA0IDIuNyAxLjUuNiAzIDEgNSAxIDEgMCAyLS4zIDMtLjcgMS0uNCAyLTEgMi43LTEuNiAxLS44IDEuNy0xLjUgMi40LTIuM0w0NiAxNDdsMi4yIDEuNWMtLjYgMS0xLjQgMi0yLjIgMy0xIDEtMS44IDEuNy0zIDIuNC0xIC42LTIuMyAxLjItMy43IDEuNy0xLjQuNC0zIC42LTQuOC42LTEuNiAwLTMuMi0uMi00LjctLjYtMS41LS40LTIuOC0xLTQtMS42LTEuMy0uNi0yLjQtMS40LTMuNC0yLjRzLTEuOC0yLTIuNS0zLjJjLS43LTEtMS4zLTIuNC0xLjYtMy43LS40LTEuNC0uNi0yLjctLjYtNC4yIDAtMS40LjItMi44LjYtNCAuNC0xLjQgMS0yLjcgMS42LTQgLjctMSAxLjUtMiAyLjUtM3MyLTIgMy40LTIuN2MxLS43IDIuNS0xLjIgNC0xLjYgMS41LS40IDMtLjYgNC44LS42IDEuNiAwIDMgLjIgNC40LjcgMS40LjQgMi42IDEgMy44IDEuNyAxIC43IDIgMS41IDMgMi41LjggMSAxLjYgMiAyLjIgM2wtMi4yIDEuNGMtMS4zLTIuNi0yLjctNC40LTQuMy01LjUtMS41LTEtMy4zLTEuNy01LjQtMS43LTEuNyAwLTMuMy4zLTUgMS0xLjQuNi0yLjcgMS41LTMuOCAyLjctMS4yIDEuMi0yIDIuNi0yLjcgNC4zLS43IDEuNy0xIDMuNi0xIDUuN3ptMzAuNy0xNS4yaDV2MjguM0g3NXYySDU0LjV2LTMwLjN6bTQwIDMxYy0xLjYgMC0zLS4yLTQuNS0uNi0xLjUtLjQtMi44LTEtNC0xLjYtMS4zLS42LTIuNC0xLjQtMy40LTIuNHMtMi0yLTIuNi0zLjNjLS43LTEtMS4zLTIuNC0xLjYtMy44LS40LTEuMy0uNi0yLjgtLjYtNC4yIDAtMS41LjItMyAuNi00LjIuMy0xLjIgMS0yLjUgMS42LTMuNy43LTEgMS42LTIuMiAyLjYtMyAxLTEgMi0yIDMuNC0yLjYgMS4yLS42IDIuNS0xLjIgNC0xLjUgMS40LS40IDMtLjYgNC41LS42czMgLjIgNC41LjZjMS40LjMgMi43IDEgNCAxLjUgMS4yLjcgMi4zIDEuNSAzLjMgMi41czIgMiAyLjYgM2MuNiAxLjMgMS4yIDIuNiAxLjYgNCAuNCAxLjIuNiAyLjYuNiA0IDAgMS41LS4yIDMtLjYgNC4zLS40IDEuNC0xIDIuNy0xLjcgMy44LS44IDEuMi0xLjcgMi4zLTIuNyAzLjMtMSAxLTIgMS44LTMuMyAyLjUtMS4zLjgtMi42IDEuMy00IDEuNy0xLjUuNC0zIC42LTQuNS42em0wLTEuNWMxLjcgMCAzLjItLjQgNC42LTEgMS40LS44IDIuNS0xLjggMy40LTMgMS0xLjQgMS42LTMgMi00LjcuNS0xLjcuOC0zLjYuOC01LjcgMC0yLS4zLTQtLjctNS43LS41LTEuOC0xLjItMy4zLTItNC41LTEtMS4yLTItMi4yLTMuNC0zLTEuMy0uNS0yLjgtMS00LjUtMS0xLjggMC0zLjQuNS00LjcgMS0xLjMuOC0yLjUgMS44LTMuNCAzLTEgMS4zLTEuNSAyLjgtMiA0LjYtLjUgMS43LS43IDMuNi0uNyA1LjcgMCAyIC4yIDQgLjcgNS44LjUgMiAxIDMuNCAyIDQuNyAxIDEuMyAyIDIuMyAzLjQgMyAxLjMuNyAzIDEgNC43IDF6bTMxLjMtLjRjLjcgMCAxLjQgMCAyLjItLjMuNyAwIDEuNC0uNCAyLS44LjUtLjUgMS0xIDEuMy0xLjUuNC0uNi41LTEuMy41LTIgMC0xLS4yLTEuOC0uNy0yLjUtLjQtLjgtMS0xLjQtMS44LTItLjctLjYtMS42LTEuMi0yLjYtMS43bC0zLTEuNi0zLTEuOGMtMS0uNi0yLTEuMy0yLjgtMi0uOC0uNy0xLjQtMS41LTItMi40LS40LTEtLjYtMi0uNi0zIDAtMS4yLjItMi4zLjctMy4zLjMtMSAxLTEuOCAxLjgtMi42czEuOC0xLjQgMy0xLjhjMS4zLS40IDIuNy0uNiA0LjMtLjYgMyAwIDUuMi42IDcgMS44IDEuNiAxLjIgMi44IDMgMy41IDUuMmwtMi42IDEuMmMtLjQtMS0uOC0xLjgtMS4zLTIuNS0uNS0uOC0xLTEuNC0xLjctMi0uNi0uNi0xLjQtMS0yLjItMS4zLTEtLjMtMi0uNC0zLS40cy0xLjcgMC0yLjUuNGMtLjcuMy0xLjMuNi0xLjcgMS0uNS41LTEgMS0xIDEuNS0uMy41LS41IDEtLjUgMS42IDAgMSAuNCAxLjcgMSAyLjMuNC43IDEgMS4zIDEuOCAybDIuOCAxLjYgMyAxLjZjMS4yLjUgMi4yIDEgMy4yIDEuN3MyIDEuMyAyLjggMmMuOC44IDEuNCAxLjYgMiAyLjQuNCAxIC43IDEuOC43IDMgMCAxLS4zIDIuMi0uNyAzLjMtLjUgMS0xLjIgMi0yIDIuOC0xIC43LTIgMS40LTMuNSAxLjgtMS4yLjUtMi44LjctNC42LjctMS41IDAtMi44LS4yLTQtLjUtMS0uMy0yLS44LTMtMS40LS44LS42LTEuNi0xLjMtMi4yLTIuMmwtMS41LTMgMi43LTFjLjMuOC43IDEuNyAxLjMgMi41LjUuOCAxIDEuNSAyIDIgLjYuNSAxLjQgMSAyLjMgMS4yLjguMiAxLjguNCAyLjguNHptMzcuMi0yOXYyaC0xNlYxMzhIMTU4djJIMTQ3djEzLjZoMTZ2MmgtMjF2LTMwLjNoMjF6bTUuNyAwaDEwYzMuMiAwIDYgLjIgOCAuOCAyLjMuNSA0LjIgMS41IDUuNyAyLjggMS43IDEuNCAzIDMgNCA1IC43IDIgMSA0IDEgNi4yIDAgMi0uMiA0LTEgNi0uOCAxLjgtMiAzLjUtMy40IDUtMS41IDEuMy0zLjMgMi40LTUuNSAzLjItMi4yLjgtNC43IDEuMi03LjUgMS4yaC0xMS4zdi0zMC4zem01IDI4aDUuNWMxLjcgMCAzLjMtLjMgNC44LTEgMS41LS40IDIuOC0xLjMgNC0yLjQgMS0xIDItMi41IDIuNi00IC42LTEuNyAxLTMuNiAxLTUuNyAwLTItLjMtMy42LTEtNS4yLS42LTEuNC0xLjQtMi44LTIuNS00LTEtMS0yLjMtMi0zLjgtMi41LTEuNS0uNi0zLjItMS01LTFoLTUuNHYyNnoiIGZpbGw9IiNGRkYiLz48Y2lyY2xlIHN0cm9rZT0iI0ZGRiIgc3Ryb2tlLXdpZHRoPSIzIiBmaWxsPSIjOEM1MzNGIiBjeD0iMTA3LjgiIGN5PSIxMC43IiByPSI5LjkiLz48L2c+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMi45NzYgNDUuODY3KSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2U9IiNGOEU3MUMiPjxnIGZpbGw9IiNEOEQ4RDgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCI+PHBhdGggZD0iTTc2LjQuMnY4LjNNODAuMyA1aC04Ii8+PC9nPjxnIGZpbGw9IiNEOEQ4RDgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCI+PHBhdGggZD0iTTE1IDkzLjN2OC4zTTE5IDk3LjJoLTgiLz48L2c+PGcgZmlsbD0iI0Q4RDhEOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIj48cGF0aCBkPSJNMjg1LjMgMTU3LjhWMTY5TTI5MS4yIDE2My41aC0xMSIvPjwvZz48Y2lyY2xlIGN4PSI0LjgiIGN5PSI2NC40IiByPSI0LjgiLz48Y2lyY2xlIGN4PSIzMTAuMyIgY3k9IjEyOC44IiByPSI0LjgiLz48L2c+PC9nPjwvc3ZnPg=="-->
+                                         <!--alt="已打烊">-->
+                                    <!--<p class="shopopen-info">本店已经打烊啦</p>-->
+                                    <!--<div class="shopopen-time">营业时间： {$shop.open_time}</div>-->
+                                <!--</div>-->
+                                <!--<div class="dialog-footer">-->
+                                    <!--<button class="dialog-btn"><a href="javascript:;">我知道了</a></button>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="t-c guid" id="">-->
+                <!--&lt;!&ndash;-->
+                <!--<a href="javascript:history.back(-1)">-->
+                    <!--<button class="pos-a o-fz&#45;&#45;15 guid-close" style="z-index: 999999">返回</button>-->
+                <!--</a>-->
+                <!--&ndash;&gt;-->
+                <!--&lt;!&ndash;-->
+                <!--<a href="javascript:history.back(-1)">-->
+                <!--<button class="pos-a t-c o-ta&#45;&#45;c guid-next" id="guid-next">继续浏览</button>-->
+                <!--</a>-->
+                <!--&ndash;&gt;-->
+            <!--</div>-->
+
+        <!--</div>-->
+    <!--</if>-->
+    <!--未支付订单-->
+    <!--
+    <div class="modal">
+        <div class="mask"></div>
+        <div class="dialog sliver confirm-dialog dialog-no-header">
+            <div class="dialog-header"><p class="dialog-title"></p>
+                <button class="btn dialog-btn-close"></button>
+            </div>
+            <div class="dialog-body" style="max-height: 507px;"><p>您有一笔未支付的订单，</p><br>
+                <p>是否需要查看订单？</p></div>
+            <div class="dialog-footer">
+                <button class="dialog-btn-cancel">重新点菜</button>
+                <button class="dialog-btn-confirm">去看看</button>
+            </div>
+        </div>
+    </div>
+
+    -->
+
+    <!--头部信息-->
+    <div class="dish-menu-main">
+        <div class="dish-mesthead ads-existed">
+            <a href="javascript:history.back(-1)">
+                <div class="shop">
+                    <img class="shop-logo" src="{$shop.logo}" alt="门店logo">
+                    <div class="shop-business-info-container">
+                        <div class="shop-title o-text-ellipsis">
+                            <span class="of o-text-ellipsis">{$shop.name}</span><img alt="门店切换"
+                              src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMjhweCIgaGVpZ2h0PSIyOHB4IiB2aWV3Qm94PSIwIDAgMjggMjgiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8IS0tIEdlbmVyYXRvcjogU2tldGNoIDQ1LjEgKDQzNTA0KSAtIGh0dHA6Ly93d3cuYm9oZW1pYW5jb2RpbmcuY29tL3NrZXRjaCAtLT4KICAgIDx0aXRsZT5Db21iaW5lZCBTaGFwZTwvdGl0bGU+CiAgICA8ZGVzYz5DcmVhdGVkIHdpdGggU2tldGNoLjwvZGVzYz4KICAgIDxkZWZzPjwvZGVmcz4KICAgIDxnIGlkPSJTeW1ib2xzIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj4KICAgICAgICA8ZyBpZD0i5ZWG5a625L+h5oGvIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNDA4LjAwMDAwMCwgLTM2LjAwMDAwMCkiIGZpbGw9IiNGRkZGRkYiPgogICAgICAgICAgICA8cGF0aCBkPSJNNDIyLDY0IEM0MTQuMjY4MDE0LDY0IDQwOCw1Ny43MzE5ODY1IDQwOCw1MCBDNDA4LDQyLjI2ODAxMzUgNDE0LjI2ODAxNCwzNiA0MjIsMzYgQzQyOS43MzE5ODYsMzYgNDM2LDQyLjI2ODAxMzUgNDM2LDUwIEM0MzYsNTcuNzMxOTg2NSA0MjkuNzMxOTg2LDY0IDQyMiw2NCBaIE00MTQuMDgwOTYsNDguOTEwMzg1MiBMNDMwLjIxMjIxOCw0OC45MTAzODUyIEM0MzAuNjMzOTc4LDQ4LjkxMDM4NTIgNDMwLjg0MDY4MSw0OC4zODk1NDExIDQzMC41MzU4NDUsNDguMDkzMTI1NyBMNDI1LjkzNjE2MSw0My42MzIwNzQgQzQyNS42Mzk2NzcsNDMuMzQ0MTI3NyA0MjUuMTQ0ODQsNDMuNTU3OTcwMiA0MjUuMTQ0ODQsNDMuOTc1MDY5IEw0MjUuMTQ0ODQsNDYuNTM5MDYyMSBDNDI1LjE0NDg0LDQ2LjgwMTYwMTUgNDI0LjkzNjA0OCw0Ny4wMTMzMjY3IDQyNC42NzcxNDYsNDcuMDEzMzI2NyBMNDE0LjA4MDk2LDQ3LjAxMzMyNjcgQzQxMy44MjIwNTksNDcuMDEzMzI2NyA0MTMuNjEzMjY3LDQ3LjIyNTA1MiA0MTMuNjEzMjY3LDQ3LjQ4NzU5MTQgTDQxMy42MTMyNjcsNDguNDM2MTIwNiBDNDEzLjYxMzI2Nyw0OC42OTY1NDI3IDQxMy44MjIwNTksNDguOTEwMzg1MiA0MTQuMDgwOTYsNDguOTEwMzg1MiBMNDE0LjA4MDk2LDQ4LjkxMDM4NTIgWiBNNDMwLjIxMjIxOCw1Mi4wMzU0NTA0IEw0MTQuMDgwOTYsNTIuMDM1NDUwNCBDNDEzLjY1OTIwMSw1Mi4wMzU0NTA0IDQxMy40NTI0OTcsNTIuNTU2Mjk0NiA0MTMuNzU3MzMzLDUyLjg1MjcwOTkgTDQxOC4zNTcwMTcsNTcuMzEzNzYxNiBDNDE4LjY1MzUwMiw1Ny42MDE3MDggNDE5LjE0ODMzOCw1Ny4zODc4NjU0IDQxOS4xNDgzMzgsNTYuOTcwNzY2NiBMNDE5LjE0ODMzOCw1NC40MDY3NzM1IEM0MTkuMTQ4MzM4LDU0LjE0NDIzNDIgNDE5LjM1NzEzLDUzLjkzMjUwODkgNDE5LjYxNjAzMiw1My45MzI1MDg5IEw0MzAuMjE0MzA2LDUzLjkzMjUwODkgQzQzMC40NzMyMDgsNTMuOTMyNTA4OSA0MzAuNjgyLDUzLjcyMDc4MzYgNDMwLjY4Miw1My40NTgyNDQyIEw0MzAuNjgyLDUyLjUwOTcxNSBDNDMwLjY3OTkxMiw1Mi4yNDkyOTI5IDQzMC40NzExMiw1Mi4wMzU0NTA0IDQzMC4yMTIyMTgsNTIuMDM1NDUwNCBMNDMwLjIxMjIxOCw1Mi4wMzU0NTA0IFoiIGlkPSJDb21iaW5lZC1TaGFwZSI+PC9wYXRoPgogICAgICAgIDwvZz4KICAgIDwvZz4KPC9zdmc+">
+                        </div>
+                        <span class="o-fz--12 shop-time-box">
+                            <time class="shop-status o-text-ellipsis">{$shop.status_cn}</time>
+                        </span>
+                    </div>
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEIAAABCCAYAAADjVADoAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NTMzNjg1QkIxREMzMTFFNzgyRjE5MzgwM0FCQTI4MzEiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NTMzNjg1QkMxREMzMTFFNzgyRjE5MzgwM0FCQTI4MzEiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo1MzM2ODVCOTFEQzMxMUU3ODJGMTkzODAzQUJBMjgzMSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo1MzM2ODVCQTFEQzMxMUU3ODJGMTkzODAzQUJBMjgzMSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pp8f01QAAANZSURBVHja7Jq/bxMxFMfvshQJhsBV0GTo2C6IIenAjmAoahFjFiT+gG6Rkr8igg36TwBig4mlYaD/QNZKaYIaVKlV6Q30+Bpe1ZPl+237nDs/6asoycV2Prbfved7bhAEjjXHcS0IC8KCsCAsiJwgXNct1CjaXMPLDtSF2iF50AKahnQIfUafMx1/OHLi2Re8cnawDg2gA+gqyGZX9Dv2+3XVIIT/uSgIXO9BI8gP5JhP7XlLAQLXrUBD6DRQY6fU/ooOELl8BPmAD9DjhH7PoQn5gmPoBFqFWuQzNqA7CW18h17K8iHSfAS+70BHMTM5h/ah7aTZpFW1TdfPY9pk/XWM2Rr4bhe6iBjsL6ifdykTlD61IzLW727pIPB5NwbCG6gpacbuQm9jYHRLA8F8QsR2YAPrKfLuvQjwR+Sj9IKgJTsWDOgY2lJ8z9+ifngbF9iCuUEMI1aCUggcDNHKGGoDQcGSKE7oORqNtokozvB0gRiJHGMZSVGEAx0pB0G5gy+4RTZLAtEU3Fr9rLlJHhADwQz0y0yVKc7gbaAaBH+nmMmO+3MGXXwEOlYGguIGPpXeN+EAhcJxPoVfKwqiEXE9C2X5zOujIYdJ/DhcOgRSEnu/56iflb0tuO1xxo3vnaoV0eLeT5AG+0acLf4fx4T7uF203SgQfMNTw85apxaEZhB86LowDMQiYbzSQEjvSLKtyp6ohq6lJ9lasrfusoJolwViw6Q4Ai+bukAccu/ZkfsTQ1YDG8fthPFKiyxrl2tkyT7nhmafBzKyz0aG5OY+tFfygtijcYTtkyzK9oTKnlnaU2z7XKNqT7r+QM+1gqAfm/Ts89p+Q8+0gqAGOpqehjdjnoYXhlGF+ggpMKTVUFGdRFzFzExBxcxP6FIGDBNqqKZ0gOI5N3WXm4IEird/NVTQI4oib0Vcdwm9wNi/JIHIFFmmXMpaq+rYrNPs514ZlamzLApDGYhQB9eVt+OclbfjtJW3RWBI9REpBsp8CHts2HVuaipFtdis9vKHk6MWm/5oZp+hvBa7pEQs88pQvjWWBUZlQWSA8bTyIFLCWEAPKg8iJYzXtQCRAsar2oCIgcFyoHu1AhE61PkGnUBfoYeZA6o6mgVhQVgQFoQFYUGkt78CDACxQbURCfpdZAAAAABJRU5ErkJggg=="
+                         class="searchlogo" alt="search">
+                </div>
+            </a>
+            <div class="ads-column-container">
+                <div class="ads-column o-flex">
+                    <div class="o-flex__fluid of">
+                        <div class="ads-column__content-outer">
+                            <div class="ads-column__content of"><i class="icon icon-notice"></i>
+                                <span class="detail o-text-ellipsis o-flex__fluid">
+                                  <span class="detail-inner o-text-ellipsis">营业时间：{$shop.open_time}</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="o-flex__fixed ads-more">
+                        <span>更多信息<i class="btn-arrow-right"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="dish-mesthead-opendialog"></div>
+        </div>
+<!--导航-->
+        <div class="scroller-wrap default ">
+            <div class="dish-type-scroller" style="border-bottom: 1px solid rgb(241, 241, 241);">
+                <div class="scroll-wrapper" style="height: 100%;">
+ <!--循环输出分类-->
+                    <ul class="dish-type-list"
+                        style="padding-bottom: 100%; transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1); transition-duration: 600ms; transform: translate(0px, 0px) translateZ(0px);">
+                        <volist name="lists" id="vo">
+                            <li class="dish-type-item" data-classid="{$vo.id}"><span>{$vo.name}</span></li>
+                        </volist>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="dish-scroller">
+                <div class="copyright copyright--dish-scroller">
+                    <div class="dish-scroller dish-scroller-main " style="z-index: auto;">
+                        <div class="copyright copyright--dish-scroller dish-scroller-action"
+                             style="position: relative;  height: auto;">
+                            <div>
+                                <!--循环输出菜单-->
+                                <p class="dish-item-type"style="position: absolute; width: 100%; top: -27px; left: 0px; height: 27px;"><span class="dishType"></span></p>
+                                <ul class="dish-list clearfix" style="width: 100%; bottom: 60px;white-space: normal;">
+                                    <volist name="foodList" id="vo">
+                                        <li class="dish-item-dish"
+                                            style="position: absolute; width: 100%; top:{$i*90-90}px; left: 0px; height: 90px; <if condition='count($lists) eq $i'>margin-bottom:60px;</if> ">
+                                            <div class="dish-on-selling">
+                                                <div class="dish-list-item">
+                                                    <if condition="$vo.logo eq ''"><div class="dish-item-img dish-img-default"></div> <else />  <div class="dish-item-img" style="background-image: url({$vo.logo})"></div> </if>
+                                                    <div class="dish-item-content">
+                                                        <div class="dish-item-fill"><span class="dish-item-name">{$vo.name}</span></div>
+                                                        <div class="dish-item-bottom">
+                                                            <div class="dish-price-container">
+                                                                <span class="dish-item-price">
+                                                                    <span class="dish-item-price-number dish-item-price-nosub price">{$vo.price}</span>
+                                                                </span>
+                                                                <if condition="$shop.status eq 'on'"> <!-- 商店打样--->
+                                                                <div class="counter counter-min--nonum">
+                                                                    <a class="counter-minus"  <if condition="$vo.num elt 0"> style="display:none;" </if> data-id="{$vo.id}"><span class="counter-click-mask"></span></a>
+                                                                    <span class="counter-num" style="min-width: 35px; z-index: 11;"><if condition="$vo.num gt 0">{$vo.num}</if></span>
+                                                                    <a class="counter-add" data-id="{$vo.id}"><span class="counter-click-mask"></span></a>
+                                                                </div>
+                                                                </if>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </volist>
+                                </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+<!--购物车-->
+
+    <div class="">
+        <if condition="$shop.status eq 'on'">
+        <div class="cart-container">
+<!--购物车-->
+
+            <div class="tiny-cart">
+                <div class="tiny-cart-left">
+                    <button class="cart-icon cart-icon--tiny" <if condition="$num neq 0"> data-count="{$num}"</if>
+                            style="z-index: 5; border: 3px solid rgb(64, 64, 64);"><img
+                            src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+Cjxzdmcgd2lkdGg9IjU0cHgiIGhlaWdodD0iNTRweCIgdmlld0JveD0iMCAwIDU0IDU0IiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPgogICAgPCEtLSBHZW5lcmF0b3I6IFNrZXRjaCA0MCAoMzM3NjIpIC0gaHR0cDovL3d3dy5ib2hlbWlhbmNvZGluZy5jb20vc2tldGNoIC0tPgogICAgPHRpdGxlPui0reeJqei9pjwvdGl0bGU+CiAgICA8ZGVzYz5DcmVhdGVkIHdpdGggU2tldGNoLjwvZGVzYz4KICAgIDxkZWZzPjwvZGVmcz4KICAgIDxnIGlkPSJQYWdlLTEiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPgogICAgICAgIDxnIGlkPSLngrnppJDpobUyIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNDcuMDAwMDAwLCAtMTUyNS4wMDAwMDApIiBmaWxsPSIjRkZGRkZGIj4KICAgICAgICAgICAgPGcgaWQ9Iui0reeJqei9puagjy1jb3B5IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwLjAwMDAwMCwgMTQ4OC4wMDAwMDApIj4KICAgICAgICAgICAgICAgIDxnIGlkPSLotK3nianovaYiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIwLjAwMDAwMCwgNy4wMDAwMDApIj4KICAgICAgICAgICAgICAgICAgICA8cGF0aCBkPSJNNDQuMzM3NzkyNiw3Ni4yNzQxNDI5IEM0Mi4yMDkwOTcsNzYuMjc0MTQyOSA0MC40ODQ5NDk4LDc4LjAwMDIxNDMgNDAuNDg0OTQ5OCw4MC4xMzEyODU3IEM0MC40ODQ5NDk4LDgyLjI2MjM1NzEgNDIuMjA5MDk3LDgzLjk4ODQyODYgNDQuMzM3NzkyNiw4My45ODg0Mjg2IEM0Ni40NjY0ODgzLDgzLjk4ODQyODYgNDguMTkwNjM1NSw4Mi4yNjIzNTcxIDQ4LjE5MDYzNTUsODAuMTMxMjg1NyBDNDguMTkwNjM1NSw3OC4wMDAyMTQzIDQ2LjQ2ODQxNDcsNzYuMjc0MTQyOSA0NC4zMzc3OTI2LDc2LjI3NDE0MjkgTDQ0LjMzNzc5MjYsNzYuMjc0MTQyOSBMNDQuMzM3NzkyNiw3Ni4yNzQxNDI5IFogTTcxLjMwNzY5MjMsNzYuMjc0MTQyOSBDNjkuMTc4OTk2Nyw3Ni4yNzQxNDI5IDY3LjQ1NDg0OTUsNzguMDAwMjE0MyA2Ny40NTQ4NDk1LDgwLjEzMTI4NTcgQzY3LjQ1NDg0OTUsODIuMjYyMzU3MSA2OS4xNzg5OTY3LDgzLjk4ODQyODYgNzEuMzA3NjkyMyw4My45ODg0Mjg2IEM3My40MzYzODgsODMuOTg4NDI4NiA3NS4xNjA1MzUxLDgyLjI2MjM1NzEgNzUuMTYwNTM1MSw4MC4xMzEyODU3IEM3NS4xNjA1MzUxLDc4LjAwMDIxNDMgNzMuNDM4MzE0NCw3Ni4yNzQxNDI5IDcxLjMwNzY5MjMsNzYuMjc0MTQyOSBMNzEuMzA3NjkyMyw3Ni4yNzQxNDI5IEw3MS4zMDc2OTIzLDc2LjI3NDE0MjkgWiBNNzkuNTEyMzIxMSwzNy41MDIxNDI5IEM3OC41Mjc5MTk3LDM2LjM4OTM1NzEgNzcuMTc1NTcxOSwzNS43ODU3MTQzIDc1LjcwMzc4NiwzNS43ODU3MTQzIEwzNy4xMDQwODAzLDM1Ljc4NTcxNDMgTDM2Ljk2NzMwNDMsMzUuMDAwNzg1NyBDMzYuNjMwMTgwNiwzMi4xOTQ3MTQzIDM0LjE2MjQzNDgsMzAgMzEuMzQ5ODU5NSwzMCBMMjguOTI2NDIxNCwzMCBDMjcuODYxMTEwNCwzMCAyNywzMC44NjIwNzE0IDI3LDMxLjkyODU3MTQgQzI3LDMyLjk5NTA3MTQgMjcuODYxMTEwNCwzMy44NTcxNDI5IDI4LjkyNjQyMTQsMzMuODU3MTQyOSBMMzEuMzQ5ODU5NSwzMy44NTcxNDI5IEMzMi4xODc4NTI4LDMzLjg1NzE0MjkgMzMuMDQzMTgzOSwzNC42MjA4NTcxIDMzLjE1Njg0MjgsMzUuNTYwMDcxNCBMMzUuMDE3NzY1OSw0Ni4zMTc2NDI5IEwzOC4yODQ5NzY2LDY5LjM0NjcxNDMgQzM4LjYyNDAyNjgsNzIuMTUyNzg1NyA0MS4wNjQ4MDI3LDc0LjM1NzE0MjkgNDMuODQwNzc1OSw3NC4zNTcxNDI5IEw3NS4xNjA1MzUxLDc0LjM1NzE0MjkgQzc2LjIyNTg0NjIsNzQuMzU3MTQyOSA3Ny4wODY5NTY1LDczLjQ5NTA3MTQgNzcuMDg2OTU2NSw3Mi40Mjg1NzE0IEM3Ny4wODY5NTY1LDcxLjM2MjA3MTQgNzYuMjI1ODQ2Miw3MC41IDc1LjE2MDUzNTEsNzAuNSBMNDMuODQwNzc1OSw3MC41IEM0My4wMjAxMjA0LDcwLjUgNDIuMjEyOTQ5OCw2OS43NDAxNDI5IDQyLjEwNTA3MDIsNjguODQ1Mjg1NyBMNDEuNzg1Mjg0Myw2Ni41OTQ2NDI5IEw3Mi4zNDk4ODYzLDY0LjcwMjcxNDMgQzc1LjEyMzkzMzEsNjQuNzAyNzE0MyA3Ny41NjQ3MDksNjIuNTAyMjE0MyA3Ny44OTIyMDA3LDU5Ljc5ODM1NzEgTDgwLjkyODI0MDgsNDIuNDIgQzgxLjE1MzYzMjEsNDAuNTYyNzg1NyA4MC42MzczNTEyLDM4Ljc3MzA3MTQgNzkuNTEyMzIxMSwzNy41MDIxNDI5IEw3OS41MTIzMjExLDM3LjUwMjE0MjkgWiI+PC9wYXRoPgogICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICA8L2c+CiAgICAgICAgPC9nPgogICAgPC9nPgo8L3N2Zz4="
+                            alt="" style="width: 27px; height: 27px;"></button>
+                    <if condition="$value elt 0">
+                        <span class="tiny-cart-text money">购物车是空的</span> <else />
+                        <span class="tiny-cart-price price noShipmentFee moneyTotal money">{$value}</span>
+                    </if>
+                </div>
+                <div class="tiny-cart-right">
+                    <if condition="$value elt 0"> <else /> <a class="tiny-cart-btn btn--yellow" href="{$sureUrl}">选好啦</a> </if>
+                </div>
+            </div>
+
+<!--查看购物车-->
+            <div class="expand-cart">
+                <div class="expand-cart-close"></div>
+                <!--购物车挂载位置-->
+            </div>
+        </div>
+        </if>
+    </div>
+     <div></div>
+        <div class="o-tooltip" style="visibility: hidden; top: 0px; left: 0px; right: 0px;">
+            <div class="o-tooltip__trigger" style="left: 0px; right: 0px;"></div>
+        </div>
+        <div id="handleInputDOM" data-editable="false" style="display: none;"></div>
+    </div>
+</div>
+<!---商品详情-->
+
+<!--导航菜单-->
+<div class="navin">
+    <div class="floating-nav-container" style="z-index: 99">
+        <div class="nav-items">
+            <div class="item"><a href="{:U('shop/index')}"><i class="icon icon-menu"></i>首页</a></div>
+            <div class="item"><a href="{:U('Customer/lists')}"><i class="icon icon-personal"></i>个人中心</a></div>
+            <div class="item"><a href="{:U('Shop/lists/eat_type/1')}"><i class="icon icon-card"></i>堂食</a></div>
+            <div class="item"><a href="{:U('Shop/lists/eat_type/2')}"><i class="icon icon-order-list"></i>外带</a></div>
+        </div>
+        <div class="expand-control">
+            <button style="z-index: 100"><span class="navText">快速导航</span><i class="icon iconI icon-double-arrow-right"></i></button>
+        </div>
+    </div>
+</div>
+
+</body>
+<script src="__PUBLIC__/plugins/jquery-weui/lib/jquery-2.1.4.js"></script>
+<script src="__PUBLIC__/plugins/jquery-weui/lib/fastclick.js"></script>
+<include file="Public/ServerConf"/>
+
+<script>
+    $(function () {
+        FastClick.attach(document.body);
+        sure = "{:U('Car/sure', array('shop_id' => $shop['id'], 'table_number' => $Think.get.table_number))}";
+        shop_id = "{$shop['id']}";
+        value = "{{$value}";
+        // 点击获取食品列表
+        $(".dish-type-list li").on("click", function () {
+            var class_id = $(this).attr('data-classid');
+            $.ajax({
+                type: "post",
+                url:  "{:U('Food/lists')}",
+                data: {"class_id":class_id, shop_id:shop_id},
+                cache: false,
+                async : false,
+                dataType: "json",
+                success: function (data ,textStatus, jqXHR)
+                {
+                    $(".dish-list").html("");
+                    $(".dish-list").append(data);
+                },
+                error:function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert("请求失败！");
+                }
+            });
+        });
+    });
+</script>
+<script src="__PUBLIC__/plugins/jquery-weui/js/jquery-weui.js"></script>
+<script src="__PUBLIC__/index/js/action.js"></script>
+<script>
+</script>
+</body>
+</html>

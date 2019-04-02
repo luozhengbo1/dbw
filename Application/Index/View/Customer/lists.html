@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>微信点餐V1.0</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="__PUBLIC__/plugins/jquery-weui/css/gobal.css">
+    <link rel="stylesheet" href="__PUBLIC__/plugins/jquery-weui/lib/weui.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/plugins/jquery-weui/css/jquery-weui.css">
+    <link rel="stylesheet" href="__PUBLIC__/index/css/themeV1.0.css">
+
+</head>
+<body ontouchstart>
+<div id="app-placeholder" class="transparent-container">
+    <div data-reactroot="" class="o-bg-grey o-credit">
+        <div class="basicInfoBg">
+            <div class="basicInfoBg-imgouter">
+                <img class="basicInfoBg-img" src="{$userInfo.headimgurl}"
+                     alt="{$userInfo.nickname}">
+                <div class="basicInfoBg-vip"
+                     style="background-image: url(&quot;data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMTc1cHgiIGhlaWdodD0iNTVweCIgdmlld0JveD0iMCAwIDE3NSA1NSIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj4KICAgIDwhLS0gR2VuZXJhdG9yOiBTa2V0Y2ggNDQuMSAoNDE0NTUpIC0gaHR0cDovL3d3dy5ib2hlbWlhbmNvZGluZy5jb20vc2tldGNoIC0tPgogICAgPHRpdGxlPlZJUDwvdGl0bGU+CiAgICA8ZGVzYz5DcmVhdGVkIHdpdGggU2tldGNoLjwvZGVzYz4KICAgIDxkZWZzPgogICAgICAgIDxwb2x5Z29uIGlkPSJwYXRoLTEiIHBvaW50cz0iNi41NTEwMjYzIDMuNjk1NTE3NTMgNDcuMTA2NjYzNCAyLjQ2OTYwODY2IDQxLjA5MzM5NjkgMjMuNTg4MDc5MyA0Ny44MDA0MjgyIDQyLjgzMzY4NzkgMi40ODcyMTggNDMuNDgwNjQxMSI+PC9wb2x5Z29uPgogICAgICAgIDxwb2x5Z29uIGlkPSJwYXRoLTMiIHBvaW50cz0iNi41NTEwMjYzIDMuNjk1NTE3NTMgNDcuMTA2NjYzNCAyLjQ2OTYwODY2IDQxLjA5MzM5NjkgMjMuNTg4MDc5MyA0Ny44MDA0MjgyIDQyLjgzMzY4NzkgMi40ODcyMTggNDMuNDgwNjQxMSI+PC9wb2x5Z29uPgogICAgICAgIDxwYXRoIGQ9Ik02OC4xODYyNSwxMS41OCBMNzUuODY2MjUsMzMgTDc5LjgyNjI1LDMzIEw4Ny41MDYyNSwxMS41OCBMODMuOTY2MjUsMTEuNTggTDc3LjkwNjI1LDI5LjM0IEw3Ny44MTYyNSwyOS4zNCBMNzEuNzI2MjUsMTEuNTggTDY4LjE4NjI1LDExLjU4IFogTTg4Ljg3ODc1LDExLjU4IEw4OC44Nzg3NSwzMyBMOTIuMTE4NzUsMzMgTDkyLjExODc1LDExLjU4IEw4OC44Nzg3NSwxMS41OCBaIE05NS40NDEyNSwxMS41OCBMMTA0LjMyMTI1LDExLjU4IEMxMDkuNDIxMjUsMTEuNTggMTExLjk3MTI1LDEzLjc0IDExMS45NzEyNSwxOC4wOSBDMTExLjk3MTI1LDIyLjQ3IDEwOS4zOTEyNSwyNC42NiAxMDQuMjYxMjUsMjQuNjYgTDk4LjcxMTI1LDI0LjY2IEw5OC43MTEyNSwzMyBMOTUuNDQxMjUsMzMgTDk1LjQ0MTI1LDExLjU4IFogTTk4LjcxMTI1LDE0LjM3IEw5OC43MTEyNSwyMS44NyBMMTA0LjA1MTI1LDIxLjg3IEMxMDUuNjcxMjUsMjEuODcgMTA2Ljg0MTI1LDIxLjU3IDEwNy41OTEyNSwyMC45NyBDMTA4LjMxMTI1LDIwLjM3IDEwOC43MDEyNSwxOS40MSAxMDguNzAxMjUsMTguMDkgQzEwOC43MDEyNSwxNi43NyAxMDguMzExMjUsMTUuODEgMTA3LjU2MTI1LDE1LjI3IEMxMDYuODExMjUsMTQuNjcgMTA1LjY0MTI1LDE0LjM3IDEwNC4wNTEyNSwxNC4zNyBMOTguNzExMjUsMTQuMzcgWiIgaWQ9InBhdGgtNSI+PC9wYXRoPgogICAgICAgIDxmaWx0ZXIgeD0iLTIuMyUiIHk9Ii00LjclIiB3aWR0aD0iMTA5LjElIiBoZWlnaHQ9IjExOC43JSIgZmlsdGVyVW5pdHM9Im9iamVjdEJvdW5kaW5nQm94IiBpZD0iZmlsdGVyLTYiPgogICAgICAgICAgICA8ZmVPZmZzZXQgZHg9IjEiIGR5PSIxIiBpbj0iU291cmNlQWxwaGEiIHJlc3VsdD0ic2hhZG93T2Zmc2V0T3V0ZXIxIj48L2ZlT2Zmc2V0PgogICAgICAgICAgICA8ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSIwLjUiIGluPSJzaGFkb3dPZmZzZXRPdXRlcjEiIHJlc3VsdD0ic2hhZG93Qmx1ck91dGVyMSI+PC9mZUdhdXNzaWFuQmx1cj4KICAgICAgICAgICAgPGZlQ29sb3JNYXRyaXggdmFsdWVzPSIwIDAgMCAwIDAuOTQ5MDE5NjA4ICAgMCAwIDAgMCAwLjQxNTY4NjI3NSAgIDAgMCAwIDAgMC4xMTM3MjU0OSAgMCAwIDAgMSAwIiB0eXBlPSJtYXRyaXgiIGluPSJzaGFkb3dCbHVyT3V0ZXIxIj48L2ZlQ29sb3JNYXRyaXg+CiAgICAgICAgPC9maWx0ZXI+CiAgICA8L2RlZnM+CiAgICA8ZyBpZD0i5Liq5Lq65Lit5b+DIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj4KICAgICAgICA8ZyBpZD0i5Lya5ZGYIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMjg3LjAwMDAwMCwgLTMzMC4wMDAwMDApIj4KICAgICAgICAgICAgPGcgaWQ9IlZJUCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjg1LjAwMDAwMCwgMzI4LjAwMDAwMCkiPgogICAgICAgICAgICAgICAgPGcgaWQ9IlJlY3RhbmdsZS01IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxMjcuNjM0NTUxLCAxMS43NTc3NTIpIj4KICAgICAgICAgICAgICAgICAgICA8bWFzayBpZD0ibWFzay0yIiBmaWxsPSJ3aGl0ZSI+CiAgICAgICAgICAgICAgICAgICAgICAgIDx1c2UgeGxpbms6aHJlZj0iI3BhdGgtMSI+PC91c2U+CiAgICAgICAgICAgICAgICAgICAgPC9tYXNrPgogICAgICAgICAgICAgICAgICAgIDx1c2UgaWQ9Ik1hc2siIGZpbGw9IiNGMjZBMUQiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDI1LjE0MzgyMywgMjIuOTc1MTI1KSByb3RhdGUoNi4wMDAwMDApIHRyYW5zbGF0ZSgtMjUuMTQzODIzLCAtMjIuOTc1MTI1KSAiIHhsaW5rOmhyZWY9IiNwYXRoLTEiPjwvdXNlPgogICAgICAgICAgICAgICAgICAgIDxyZWN0IGZpbGw9IiNDMTMwMDkiIG1hc2s9InVybCgjbWFzay0yKSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoOS43MDUyODQsIDM0LjE1MjEzMikgcm90YXRlKC0xMS4wMDAwMDApIHRyYW5zbGF0ZSgtOS43MDUyODQsIC0zNC4xNTIxMzIpICIgeD0iLTMuMjAwMzc1MzYiIHk9IjI5LjMxMDU0MDgiIHdpZHRoPSIyNS44MTEzMTk2IiBoZWlnaHQ9IjkuNjgzMTgxOTYiPjwvcmVjdD4KICAgICAgICAgICAgICAgIDwvZz4KICAgICAgICAgICAgICAgIDxnIGlkPSJSZWN0YW5nbGUtNS1Db3B5IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyNi45MzMzMzMsIDM0Ljc1Nzc1Mikgc2NhbGUoLTEsIDEpIHRyYW5zbGF0ZSgtMjYuOTMzMzMzLCAtMzQuNzU3NzUyKSB0cmFuc2xhdGUoMS45MzMzMzMsIDExLjc1Nzc1MikiPgogICAgICAgICAgICAgICAgICAgIDxtYXNrIGlkPSJtYXNrLTQiIGZpbGw9IndoaXRlIj4KICAgICAgICAgICAgICAgICAgICAgICAgPHVzZSB4bGluazpocmVmPSIjcGF0aC0zIj48L3VzZT4KICAgICAgICAgICAgICAgICAgICA8L21hc2s+CiAgICAgICAgICAgICAgICAgICAgPHVzZSBpZD0iTWFzayIgZmlsbD0iI0YyNkExRCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjUuMTQzODIzLCAyMi45NzUxMjUpIHJvdGF0ZSg2LjAwMDAwMCkgdHJhbnNsYXRlKC0yNS4xNDM4MjMsIC0yMi45NzUxMjUpICIgeGxpbms6aHJlZj0iI3BhdGgtMyI+PC91c2U+CiAgICAgICAgICAgICAgICAgICAgPHJlY3QgaWQ9IlJlY3RhbmdsZS01IiBmaWxsPSIjQzEzMDA5IiBtYXNrPSJ1cmwoI21hc2stNCkiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDkuNzA1Mjg0LCAzNC4xNTIxMzIpIHJvdGF0ZSgtMTEuMDAwMDAwKSB0cmFuc2xhdGUoLTkuNzA1Mjg0LCAtMzQuMTUyMTMyKSAiIHg9Ii0zLjIwMDM3NTM2IiB5PSIyOS4zMTA1NDA4IiB3aWR0aD0iMjUuODExMzE5NiIgaGVpZ2h0PSI5LjY4MzE4MTk2Ij48L3JlY3Q+CiAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICA8cGF0aCBkPSJNMjQuMTcxNTk3Niw4LjUwNTE2Nzk2IEMyNC4xNzE1OTc2LDguNTA1MTY3OTYgNTYuODQ2MDU1MiwyIDg5LjUyMDUxMjcsMiBDMTIyLjE5NDk3LDIgMTU0Ljg2OTQyOCw4LjUwNTE2Nzk2IDE1NC44Njk0MjgsOC41MDUxNjc5NiBMMTUwLjk4NzMxNCw0OC4xODY2OTI1IEMxNTAuOTg3MzE0LDQ4LjE4NjY5MjUgMTIyLjE5NDk3LDQxLjY4MTUyNDUgODkuNTIwNTEyNyw0MS42ODE1MjQ1IEM1Ni44NDYwNTUyLDQxLjY4MTUyNDUgMjguMDUzNzExNCw0OC4xODY2OTI1IDI4LjA1MzcxMTQsNDguMTg2NjkyNSBMMjQuMTcxNTk3Niw4LjUwNTE2Nzk2IFoiIGlkPSJSZWN0YW5nbGUtNCIgZmlsbD0iI0ZGODExNiI+PC9wYXRoPgogICAgICAgICAgICAgICAgPGcgaWQ9InR4dCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDQuMDAwMDAwLCAyNC4wMDAwMDApIiBmaWxsLXJ1bGU9Im5vbnplcm8iIGZpbGw9IiNGRkZGRkYiPgogICAgICAgICAgICAgICAgICAgIDxwb2x5Z29uIGlkPSJMaW5lIiBwb2ludHM9IjAuMjcwMzkxODgzIDIuNjc2Njg3MDggNy44ODgyNjAyNiAxLjcxOTMwNTY4IDcuNzYzNTY1MzkgMC43MjcxMTA1NDkgMC4xNDU2OTcwMDUgMS42ODQ0OTE5NCI+PC9wb2x5Z29uPgogICAgICAgICAgICAgICAgICAgIDxwb2x5Z29uIGlkPSJMaW5lLUNvcHktNiIgcG9pbnRzPSI5MS4xMDE0NDU4IDEuNzE1NjY0OTIgODMuNDk2NzEyIDAuNjU4MTE4NTU0IDgzLjM1ODk3MzMgMS42NDg1ODcxNSA5MC45NjM3MDcxIDIuNzA2MTMzNTEiPjwvcG9seWdvbj4KICAgICAgICAgICAgICAgIDwvZz4KICAgICAgICAgICAgICAgIDxyZWN0IGlkPSJSZWN0YW5nbGUiIHg9IjAiIHk9IjAiIHdpZHRoPSIxODAiIGhlaWdodD0iNjAiPjwvcmVjdD4KICAgICAgICAgICAgICAgIDxnPgogICAgICAgICAgICAgICAgICAgIDx1c2UgZmlsbD0iYmxhY2siIGZpbGwtb3BhY2l0eT0iMSIgZmlsdGVyPSJ1cmwoI2ZpbHRlci02KSIgeGxpbms6aHJlZj0iI3BhdGgtNSI+PC91c2U+CiAgICAgICAgICAgICAgICAgICAgPHVzZSBmaWxsPSIjRkZGRkZGIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIHhsaW5rOmhyZWY9IiNwYXRoLTUiPjwvdXNlPgogICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICA8L2c+CiAgICAgICAgPC9nPgogICAgPC9nPgo8L3N2Zz4=&quot;);"></div>
+            </div>
+            <p class="basicInfoBg-name ellipsis">  {$userInfo.nickname}&nbsp;
+                <small></small>
+            </p>
+        </div>
+        <div>
+            <!--
+            <div class="o-flex o-mb o-border--bottom o-bg-white o-ta--c menuLink">
+                <div class="o-flex__fluid menuLink__item">
+                    <div class="o-fz--25 menuLink__score" style="font-size: 1.563em;">0<span class="o-fz--14">分</span></div>
+                    <div class="o-fz--14">我的积分</div>
+                </div>
+                <div class="o-flex__fluid menuLink__item">
+                    <div class="o-fz--25 menuLink__balance" style="font-size: 1.563em;">0<span class="o-fz--14">元</span></div>
+                    <div class="o-fz--14">我的余额</div>
+                </div>
+            </div>
+            <div class="o-list o-border--top o-border--bottom">
+                <a class="o-list__item c-option" href="#">
+                    <div class="c-option__title">
+                        <div class="c-option__title-icon"><i class="o-icon-HYK"></i></div><会员卡</div>
+                    <div class="c-option__ending"><i class="o-icon-arrow--right"></i></div>
+                </a>
+                <a class="o-list__item c-option" href="#">
+                    <div class="c-option__title">
+                        <div class="c-option__title-icon"><i class="o-icon-HYCZ"></i></div>会员充值</div>
+                    <div class="c-option__body"><span class="menuLink__item-tag">充值+</span></div>
+                    <div class="c-option__ending"><i class="o-icon-arrow--right"></i></div>
+                </a>
+            </div>
+            -->
+            <div class="o-list o-border--top"></div>
+            <div class="o-list o-border--top o-border--bottom">
+                <a class="o-list__item c-option" href="{:U('Order/lists',array('eat_type'=>1))}">
+                    <div class="c-option__title">
+                        <div class="c-option__title-icon"><i class="o-icon-DD"></i></div>订单中心</div>
+                    <div class="c-option__ending"><i class="o-icon-arrow--right"></i></div>
+                </a>
+                <!--
+                <a class="o-list__item c-option"
+                   href="https://weixin.keruyun.com/coupon/getCouponList?shopId=810052472">
+                    <div class="c-option__title">
+                        <div class="c-option__title-icon"><i class="o-icon-YH"></i></div>优惠券</div>
+                    <div class="c-option__ending"><i class="o-icon-arrow--right"></i></div>
+                </a>
+                -->
+                <a class="o-list__item c-option" href="{:U('Address/lists')}">
+                    <div class="c-option__title">
+                        <div class="c-option__title-icon"><i class="o-icon-DZ"></i></div>地址管理</div>
+                    <div class="c-option__ending"><i class="o-icon-arrow--right"></i></div>
+                </a>
+            </div>
+
+            <div class="o-list o-border--top"></div>
+            <div class="o-list o-border--top o-border--bottom">
+                <a class="o-list__item c-option" href="{:U('Customer/edit', array('id' => $userInfo['id']))}">
+                    <div class="c-option__title">
+                        <div class="c-option__title-icon"><i class="o-icon-SZ"></i></div>用户设置</div>
+                    <div class="c-option__ending"><i class="o-icon-arrow--right"></i></div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--导航菜单-->
+<div class="navin">
+    <div class="floating-nav-container" style="z-index: 99">
+        <div class="nav-items">
+            <div class="item"><a href="{:U('Shop/index')}"><i class="icon icon-menu"></i>首页</a></div>
+            <div class="item"><a href="{:U('Customer/lists')}"><i class="icon icon-personal"></i>个人中心</a></div>
+            <div class="item"><a href="{:U('Shop/lists/eat_type/1')}"><i class="icon icon-card"></i>堂食</a></div>
+            <div class="item"><a href="{:U('Shop/lists/eat_type/2')}"><i class="icon icon-order-list"></i>外带</a></div>
+        </div>
+        <div class="expand-control">
+            <button style="z-index: 100"><span class="navText">快速导航</span><i class="icon iconI icon-double-arrow-right"></i></button>
+        </div>
+    </div>
+</div>
+</body>
+<script src="__PUBLIC__/plugins/jquery-weui/lib/jquery-2.1.4.js"></script>
+<script src="__PUBLIC__/plugins/jquery-weui/lib/fastclick.js"></script>
+<script>
+
+</script>
+<script src="__PUBLIC__/plugins/jquery-weui/js/jquery-weui.js"></script>
+<script src="__PUBLIC__/index/js/action.js"></script>
+</body>
+</html>

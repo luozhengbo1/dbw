@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>{:C('WEB_TITLE')}</title>
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="format-detection" content="telephone=no">
+
+		<link rel="stylesheet" href="__PUBLIC__/plugins/layui/css/layui.css" media="all" />
+		<link rel="stylesheet" href="__PUBLIC__/css/global.css" media="all">
+		<link rel="stylesheet" href="__PUBLIC__/plugins/font-awesome/css/font-awesome.min.css">
+	</head>
+
+	<body>
+		<div style="margin: 15px;">
+			<blockquote class="layui-elem-quote">
+				<a href="{:U('AuthGroup/addGroup')}" class="layui-btn layui-btn-small"><i class="layui-icon">&#xe654;</i> 新增</a>
+				<form class="layui-form" style="float:right;" action="{:U('AuthGroup/groupList')}">
+					<div class="layui-form-item" style="margin:0;">
+						<label class="layui-form-label">名称：</label>
+						<div class="layui-input-inline">
+							<input type="text" name="title" lay-verify="title" class="layui-input" value="<notempty name="title">{$title}</notempty>" autocomplete="off" placeholder="支持模糊查询..">
+						</div>
+						<div class="layui-form-mid layui-word-aux" style="padding:0;">
+							<button class="layui-btn" lay-submit=""><i class="fa fa-search" aria-hidden="true"></i> 查询</button>
+						</div>
+					</div>
+				</form>
+				</blockquote>
+			<fieldset class="layui-elem-field">
+				<legend>用户组列表</legend>
+				<div class="layui-field-box">
+					<table class="site-table table-hover">
+						<thead>
+							<tr>
+								<th><input type="checkbox"></th>
+								<th>名称</th>
+								<th>状态</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<!--内容容器-->
+						<tbody>
+							<volist name="groupList" id="vo">
+							<tr>
+								<td><input type="checkbox"></td>
+								<td>{$vo.title}</td>
+								<td><i class="fa fa-circle <if condition="$vo.status eq 1">layui-color-online<else />layui-color-offline</if>" aria-hidden="true"></i></td>								<td>
+									<a href="{:U('AuthGroup/groupDetail',array('id'=> $vo['id']))}" class="layui-btn layui-btn-normal layui-btn-mini"title="详情"><i class="fa fa-search" aria-hidden="true"></i> 详情</a>
+									<a href="{:U('AuthGroup/editGroup',array('id'=> $vo['id']))}" class="layui-btn layui-btn-mini"><i class="layui-icon" title="编辑">&#xe642;</i> 编辑</a>
+									<a href="javascript:delGroup({$vo['id']});" class="layui-btn layui-btn-danger layui-btn-mini"><i class="layui-icon" title="删除">&#xe640;</i> 删除</a>
+								</td>
+							</tr>
+							</volist>	
+						</tbody>
+					</table>
+					<div class="layui-box layui-laypage layui-laypage-default">
+						<volist name="pageList" id="vo">
+							<if condition="$vo.curr eq 1">
+								<span class="layui-laypage-curr"><em class="layui-laypage-em"></em><em>{$vo.name}</em></span>
+							<else />
+								<a href="{$vo.href}" class="layui-laypage-curr">{$vo.name}</a>
+							</if>
+						</volist>
+					</div>
+				</div>
+			</fieldset>
+		</div>
+		<script type="text/javascript" src="__PUBLIC__/plugins/layui/layui.js"></script>
+		<script>
+			layui.use(['form','layer'], function(){
+				var form = layui.form;
+				var layer = layui.layer;
+				var $ = layui.jquery;
+				/*form.verify({
+					
+					title: function(value, item){
+						if(value.length < 1){
+						
+							return '角色组名不能少于1个字符！';
+						}
+					}
+				});*/
+
+				form.on('submit(subBtn)', function(data){
+					return true;
+				});
+				$('#checkAll').click(function(){
+					if($(this).prop("checked")){
+
+						$("input[name='ids[]']").each(function(){ 
+							$(this).prop("checked", true);
+						});
+					
+					}else{
+
+						$("input[name='ids[]']").each(function(){ 
+							$(this).prop("checked", false);
+						});
+					} 
+				});
+			});	
+			function delGroup(id){
+				var $ = layui.jquery;
+				layer.confirm('确认是否删除?', {
+					title: '提示',
+					icon: 3,
+					btn: ['确定','取消']
+				
+				}, function(){
+					
+					$.ajax({
+						type:'post',
+						url : '{:U('AuthGroup/delGroup')}',
+						dataType : 'json',
+						data:{'id':parseInt(id)},
+						success : function(data){		
+							
+							layer.confirm(data.msg, {
+								title: '提示',
+								icon: data.code,
+								btn: ['确定']				
+							},function(){
+								location.reload();
+							});
+						},
+						error : function(XMLHttpRequest, textStatus, errorThrown){
+							layer.alert('请求发送失败,请重试！', {
+								title : '提示',
+								icon : 0,
+							});
+						}
+					});
+					
+				});
+			
+			}			
+		</script>	
+	</body>
+
+</html>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="a783eb76-184f-4bf5-880a-580c08286a8e" name="lzb.istiny.cc" url="http://lzb.istiny.cc">
+        <fileTransfer host="lzb.istiny.cc" port="22" rootFolder="/home/lzb/dbw/WWWdbw" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

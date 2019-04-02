@@ -1,0 +1,79 @@
+.admin-main{
+	margin: 15px;
+}
+.admin-main blockquote{	
+	overflow: hidden;	
+}
+.admin-main blockquote img{	
+	width: 100px;
+    height: 100px;
+	float: left;
+}
+.user-panel{
+	margin-left:115px;
+	margin-top:10px;
+}
+.user-panel p {
+	
+	margin-top:10px;
+}
+.user-panel p span{
+	
+	font-size:16px;
+	font-weight: bold;
+}
+.user-panel .tag  a{
+	
+	color:#999;
+	margin-right:20px;
+	
+}
+.layui-elem-field{
+	
+	padding:10px 15px 15px 15px;
+
+}
+.used-panel li{
+
+	float: left;
+    margin-right: 15px;
+    text-align: center;
+    position: relative;
+	
+}
+.used-panel li a{
+
+	width: 100px;
+    padding: 15px;
+    display: block;
+    position: relative;
+    border: 1px solid #ff7200;	
+
+}
+.used-panel li a .icon{
+
+    display: block;
+    width: 70px;
+    margin: 0px auto;
+    -webkit-transition: margin-top 0.2s linear;
+    -moz-transition: margin-top 0.2s linear;
+    -ms-transition: margin-top 0.2s linear;
+    -o-transition: margin-top 0.2s linear;
+    transition: margin-top 0.2s linear;
+	
+}
+.used-panel li a .icon i{
+	
+	color:#ff7200;
+}
+.used-panel li a .title {
+    display: block;
+    color: #ff7200;
+    font-size: 16px;
+    margin-top: 10px;
+    font-weight: normal;
+}
+.now-data{
+	width:500px;
+	margin-right:10px;
+}

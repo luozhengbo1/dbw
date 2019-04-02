@@ -1,0 +1,21 @@
+<volist name="lists" id="vo">
+    <li><a href="{:U('Shop/shop', array('shop_id' => $vo['id']))}" class="clearfix">
+        <img class="brand-shop__list-label fl" src="{$vo.logo}">
+        <div class="brand-shop__menu-icon fr">
+            <eq name="vo.eat_type" value="12">
+                <i title="WM"></i>
+                <i title="TS"></i>
+            </eq>
+            <eq name="vo.eat_type" value="1">
+                <i title="TS"></i>
+            </eq>
+            <eq name="vo.eat_type" value="2">
+                <i title="WM"></i>
+            </eq>
+        </div>
+        <div class="brand-shop__menu-detail clearfi">
+            <h3 class="brand-shop__text-omit">{$vo.name}</h3>
+            <div class="brand-shop__menu-condition"><eq name="vo.status" value="on"><i class="fl icon-color">{$vo.status_cn}</i><else/><i class="fl">{$vo.status_cn}</i></eq><span>{$vo.class_id}</span></div>
+        </div>
+    </a></li>
+</volist>

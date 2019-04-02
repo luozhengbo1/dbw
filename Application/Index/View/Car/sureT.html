@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>微信点餐V1.0</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="__PUBLIC__/plugins/jquery-weui/css/gobal.css">
+    <link rel="stylesheet" href="__PUBLIC__/plugins/jquery-weui/lib/weui.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/plugins/jquery-weui/css/jquery-weui.css">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="__PUBLIC__/index/css/themeV1.0.css">
+    <style>
+        .weui-grid {
+            position: relative;
+            float: left;
+            padding: 4px;
+            width: 20%;
+            box-sizing: border-box;
+            /* height: 60px; */
+            /* margin: 2px auto; */
+        }
+        .fa{
+            color: #00FF00;
+        }
+        .seatTable{
+            color: #e80012;
+        }
+    </style>
+</head>
+<body ontouchstart>
+<include file="Public/ServerConf"/>
+<div id="app-placeholder" class="transparent-container">
+    <!--头部信息-->
+    <div class="dish-menu" style="display: none">
+        <div class="register notice">
+            <a href="javascript:history.back(-1)">返回</a>
+            <p>泛亚微信点餐V1.0</p>
+        </div>
+    </div>
+    <!--头部信息-->
+    <div data-reactroot="" class="o-bg-grey o-flex o-flex--column order-wm">
+        <form class="o-flex__fluid formData">
+            <input type="hidden" name="shop_id" value="{$shop_id}">
+            <input type="hidden" name="eat_type" value="{$eat_type}">
+            <input type="hidden" name="type1" VALUE="t">
+                <div style="padding-bottom: 15px;">
+                    <ul class="o-list o-border--bottom" style="margin-top: 15px;">
+                        <div class="o-list-divider-title">堂食信息</div>
+                     <!--    <li class="o-list__item c-option">
+                            <div class="c-option__title order-icon order-icon--dish">取餐方式</div>
+                            <div class="c-option__body c-option__body--righted">
+                                <button class="option-get-dish option-get-dish-checked open-popup" data-target="#half">送餐到桌</button>
+                                <button class="option-get-dish option-get-dish-check" id="getMy">前台自取</button>
+                            </div>
+                        </li> -->
+                        <li class="o-list__item c-option" data-target="#half" id="tableLi">
+                            <div class="c-option__title order-icon order-icon--dish">选择桌台</div>
+                            <div class="c-option__body c-option__body--righted">
+                                <input class="weui-input" onblur="sureTable1()" name="table_number" id="sureTable" type="text" value="{$Think.get.table_number}" placeholder="请输入您当前桌台"><span class="c-option__ending">&nbsp;&nbsp;号桌&nbsp;&nbsp;</span>
+                            </div>
+                        </li>
+
+                        <li class="o-list__item c-option" id="mobileLi" style="display: none">
+                            <div class="c-option__title order-icon order-icon--dish">输入手机号</div>
+                            <div class="c-option__body c-option__body--righted">
+                                 <input id="mobile"type="text" name="mobile" maxlength="30" placeholder="请输入手机号" value="{$data.mobile}">
+                            </div>
+                        </li>
+
+                        <li class="o-list__item c-option">
+                            <div class="c-option__title order-icon order-icon--dish">用餐时间</div>
+                            <div class="c-option__body c-option__body--righted">
+                                <php>
+                                    $time = date("Y-m-d H:i", time() + 20*60);
+                                </php>
+                                <input class="weui-input yearMDHSM" name="time" type="text" value="{$time}"  readonly="readonly"  onclick="this.blur()" placeholder="请选择用餐时间">
+                            </div>
+                        </li>
+                        <li class="o-list__item c-option">
+                            <div class="c-option__title order-icon order-icon--pay">支付方式</div>
+                            <span class="c-option__ending">微信支付</span>
+                            <!--
+                              <div class="c-option__body c-option__body--righted">
+                                  <button class="option-get-dish option-get-dish-checked">在线支付</button>
+                                  <button class="option-get-dish option-get-dish-check">线下支付</button>
+                              </div>
+                             -->
+                        </li>
+                        <input type="hidden" id="shop_id" name="shop_id" value="{$shop['id']}">
+                    </ul>
+
+                    <div class="order-summary-cart">
+                        <div class="options-group" style="margin-bottom: 5px;">
+                            <div class="dish-detail">
+                                <div class="o-flex decoration dish-detail__title">
+                                    <div class="o-flex__fluid decoration__aside"></div>
+                                    <p class="option-shop-desc ellipsis">{$shop.name}</p>
+                                    <div class="o-flex__fluid decoration__aside"></div>
+                                </div>
+                                <div class="option option-shop"><span>已选商品</span><span>共{$num}份</span></div>
+                            </div>
+                            <div class="ordered-dish-content">
+                                <volist name="buyList" id="vo">
+                                    <div>
+                                        <div class="cart-ordered-dish">
+                                            <div class="ordered-dish"><span class="dish-name">{$vo.name}</span>
+                                                <div class="withOutMarketUseCoupon" style="flex: 1 1 0%;"><span
+                                                        class="order-dish-price price">{$vo.price}</span><span
+                                                        class="order-dish-count">x{$vo.num}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </volist>
+
+                            </div>
+                            <div class="extraPrice"></div>
+                            <div class="o-flex decoration decoration--bottom option link-more-dish">
+                                <div class="o-flex__fluid decoration__aside"></div>
+                                <a href="{$modifyOrderUrl}">修改订单
+                                    &gt;</a>
+                                <div class="o-flex__fluid decoration__aside"></div>
+                            </div>
+                        </div>
+                        <div class="benefit-options"></div>
+                        <div class="options-group extra-bottom">
+                            <div class="order-summary">
+                                <div class="notHasPriviledge"></div>
+                            </div>
+                            <div class="option order-total">
+                                <div><span class="text-dove-grey">原价 </span><span class="price">{$value}</span></div>
+                                <div class="price-total"><span>总计: </span><span class="price"><span>{$value}</span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="title-option">选填</div>
+                    <ul class="form-option o-list o-border--top o-border--bottom">
+                        <!--
+                        <li class="o-list__item o-list__item--last-border c-option">
+                            <div class="c-option__title">就餐人数</div>
+
+                            <div class="c-option__body c-option__body--righted">
+                                <div class="customers-counter customers-counter-min">
+                                    <button class="customers-counter-minus"></button>
+                                    <input type="number" class="customers-counter-num" name="counter_num" value="1">
+                                    <button class="customers-counter-add"></button>
+                                </div>
+                            </div>
+
+                        </li>
+                        -->
+                        <li class="o-list__item c-option">
+                            <div class="c-option__title">备注</div>
+                            <div class="c-option__body"><input name="note" placeholder="请输入备注" maxlength="35"></div>
+                        </li>
+                    </ul>
+                </div>
+
+        </form>
+            <div class="order-cart">
+                <div class="order-cart-entry"><span>还需付 </span><span class="order-cart-price price">{$value}</span></div>
+                <div>
+                    <button class="order-cart-btn btn--yellow" id="submitCarPay">确认下单</button>
+                </div>
+            </div>
+            <span></span>
+    </div>
+
+</div>
+
+
+<!--  选择桌台  -->
+<div id="half" class='weui-popup__container popup-bottom'>
+    <div class="weui-popup__overlay"></div>
+    <div class="weui-popup__modal">
+        <div class="toolbar">
+            <div class="toolbar-inner">
+                <a href="javascript:;" class="picker-button close-popup">关闭</a>
+                <h1 class="title">选择就餐桌号</h1>
+            </div>
+        </div>
+        <div class="modal-content">
+            <div class="weui-grids">
+                <a href="javascript:;" class="weui-grid js_grid">   <!---disabled="disabled"  table 可以点击 --->
+                    <div class="weui-grid__icon">
+                        <i class="fa fa-inbox fa-2x seatTable"></i>
+                    </div>
+                    <p class="weui-grid__label"><span class="tableID">1</span>号桌</p>
+                </a>
+                <a href="javascript:;" class="weui-grid js_grid table">
+                    <div class="weui-grid__icon">
+                        <i class="fa fa-inbox fa-2x seat"></i>
+                    </div>
+                    <p class="weui-grid__label seat"><span class="tableID">2</span>号桌</p>
+                </a>
+                <a href="javascript:;" class="weui-grid js_grid table">
+                    <div class="weui-grid__icon">
+                        <i class="fa fa-inbox fa-2x seat"></i>
+                    </div>
+                    <p class="weui-grid__label"><span class="tableID">3</span>号桌</p>
+                </a>
+                <a href="javascript:;" class="weui-grid js_grid table">
+                    <div class="weui-grid__icon">
+                        <i class="fa fa-inbox fa-2x seat"></i>
+                    </div>
+                    <p class="weui-grid__label"><span class="tableID">4</span>号桌</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--导航菜单-->
+<div class="navin">
+    <div class="floating-nav-container" style="z-index: 99">
+        <div class="nav-items">
+            <div class="item"><a href="{:U('shop/index')}"><i class="icon icon-menu"></i>首页</a></div>
+            <div class="item"><a href="{:U('Customer/lists')}"><i class="icon icon-personal"></i>个人中心</a></div>
+            <div class="item"><a href="{:U('Shop/lists/eat_type/1')}"><i class="icon icon-card"></i>堂食</a></div>
+            <div class="item"><a href="{:U('Shop/lists/eat_type/2')}"><i class="icon icon-order-list"></i>外带</a></div>
+        </div>
+        <div class="expand-control">
+            <button style="z-index: 100"><span class="navText">快速导航</span><i class="icon iconI icon-double-arrow-right"></i></button>
+        </div>
+    </div>
+</div>
+</body>
+
+<script src="__PUBLIC__/plugins/jquery-weui/lib/jquery-2.1.4.js"></script>
+<script src="__PUBLIC__/plugins/jquery-weui/lib/fastclick.js"></script>
+<script>
+    $(function () {
+        FastClick.attach(document.body);
+        shop_id = "{$shop['id']}";
+        value = "{{$value}";
+        // 点击获取食品列表
+    });
+//     function sureTable1(){
+//     var table=$('#sureTable').val();
+//     console.log(server_url+"0000000000000"+table);
+//    $.ajax({
+//         type: "post",
+//         url: "{:U('Table/check')}",
+//         data: {'shop_id':shop_id,'number':table},
+//         cache: false,
+//         async : false,
+//         dataType: "json",
+//         success: function (data ,textStatus, jqXHR)
+//         {
+//             if (data.status == 1) {
+//                 $.toast("选择成功");
+//             }
+//             else {
+//                 $.toast("无此桌台", "cancel");
+//                 $('#sureTable').val('');
+//             }
+//         },
+//         error:function (XMLHttpRequest, textStatus, errorThrown) {
+//            $.toast("请求失败！", "forbidden");
+//             window.location.reload();
+//         }
+//     });
+//
+// }
+</script>
+<script src="__PUBLIC__/plugins/jquery-weui/js/jquery-weui.js"></script>
+<script src="__PUBLIC__/index/js/action.js"></script>
+</body>
+</html>

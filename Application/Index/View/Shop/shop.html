@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{:C('WEB_TITLE')}</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="__PUBLIC__/plugins/jquery-weui/css/gobal.css">
+    <link rel="stylesheet" href="__PUBLIC__/plugins/jquery-weui/lib/weui.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/plugins/jquery-weui/css/jquery-weui.css">
+    <link rel="stylesheet" href="__PUBLIC__/index/css/themeV1.0.css">
+</head>
+<body ontouchstart>
+<div id="app-placeholder" class="transparent-container">
+    <div data-reactroot="" class="o-bg-grey o-credit">
+        <div class="o-flex shop-card o-mb">
+            <div class="o-flex__fluid" style="width: 100%;">
+                <div class="shop-card_top">
+                    <ul class="o-list o-list--modify o-border--top o-border--bottom">
+                        <li class="o-list__item c-option o-pb c-option--modify">
+                            <div class="o-media">
+                                <span><img class="shop-card-img" src="{$shop.logo}" alt=""></span>
+                                <div class="o-media__body o-media__body--centered">
+                                    <div class="c-description">
+                                        <div class="c-description__title c-description__title--modify o-fz--16">店铺名称：{$shop.name}</div>
+                                        <div class="c-description__body"><span class="o-label o-label-dark o-fz--14">营业状态：{$shop.status_cn}</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="shop-swiper">
+            <div class="swiper-container swiper-container-horizontal swiper-container-android">
+                <div class="swiper-wrapper"></div>
+                <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
+                    <span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span></div>
+            </div>
+        </div>
+        <div class="o-mb"></div>
+        <div class="menu-list">
+            <if condition="$shop.eat_type eq 1">
+                <div class="item"><a href="{:U('FoodClass/lists', array('shop_id' => $shop['id'], 'eat_type' => 1))}"><i class="icon icon-TS"></i><span>堂食</span></a></div>
+
+                <elseif condition="$shop.eat_type eq 2" />
+                    <div class="item"><a href="{:U('FoodClass/lists', array('shop_id' => $shop['id'], 'eat_type' => 2))}"><i class="icon icon-WM"></i><span>外卖</span></a></div>
+
+                <else />
+                <div class="item"><a href="{:U('FoodClass/lists', array('shop_id' => $shop['id'], 'eat_type' => 1))}"><i class="icon icon-TS"></i><span>堂食</span></a></div>
+                <div class="item"><a href="{:U('FoodClass/lists', array('shop_id' => $shop['id'], 'eat_type' => 2))}"><i class="icon icon-WM"></i><span>外卖</span></a></div>
+            </if>
+                <div class="item"><a href="{:U('Customer/lists')}"><i class="icon icon-WD"></i><span>个人中心</span></a></div>
+            <div class="item"><a></a></div>
+            <div class="item"><a></a></div>
+        </div>
+        <div class="o-mb"></div>
+        <div class="o-mb">
+            <ul class="o-list o-border--top o-border--bottom">
+                <li class="o-list__item c-option">
+                    <div class="c-option__title-icon"><i class="o-icon-time"></i></div>
+                    <div class="c-option__body">营业时间：{$shop.open_time} </div>
+                </li>
+                <if condition="$shop.tel neq ''">
+                    <a href="tel:{$shop.tel}">
+                        <li class="o-list__item c-option open-popup" data-target="#tel">
+                            <div class="c-option__title-icon"><i class="o-icon-phone"></i></div>
+                            <div class="c-option__body"> {$shop.tel}</div>
+                            <div class="c-option__ending"><i class="o-icon-arrow--right"></i></div>
+                        </li>
+                    </a>
+                </if>
+                <li class="o-list__item c-option">
+                    <div class="c-option__title-icon"><i class="o-icon-location"></i></div>
+                    <div class="o-text-ellipsis c-option__body">
+                        <div class="o-text-ellipsis">{$shop.address}</div>
+                    </div>
+                    <div class="c-option__ending"><i class="o-icon-arrow--right"></i></div>
+                </li>
+            </ul>
+            <!--
+            <div id="tel" class="phone-list-layer ">
+                <ul class="phone-list">
+                    <li class="phone-item"><a href="tel:0851-84808333">0851-84808333</a></li>
+                    <li class="phone-item"><a href="tel:{$shop.tel}">{$shop.tel}</a></li>
+                    <li class="phone-item">
+                        <button type="button" class="btn-cancel close-popup">取消</button>
+                    </li>
+                </ul>
+            </div>
+           -->
+        </div>
+    </div>
+</div>
+
+<!--导航菜单-->
+<div class="navin">
+    <div class="floating-nav-container" style="z-index: 99">
+        <div class="nav-items">
+            <div class="item"><a href="{:U('shop/index')}"><i class="icon icon-menu"></i>首页</a></div>
+            <div class="item"><a href="{:U('Customer/lists')}"><i class="icon icon-personal"></i>个人中心</a></div>
+            <div class="item"><a href="{:U('Shop/lists/eat_type/1')}"><i class="icon icon-card"></i>堂食</a></div>
+            <div class="item"><a href="{:U('Shop/lists/eat_type/2')}"><i class="icon icon-order-list"></i>外带</a></div>
+        </div>
+        <div class="expand-control">
+            <button style="z-index: 100"><span class="navText">快速导航</span><i class="icon iconI icon-double-arrow-right"></i></button>
+        </div>
+    </div>
+</div>
+</body>
+<script src="__PUBLIC__/plugins/jquery-weui/lib/jquery-2.1.4.js"></script>
+<script src="__PUBLIC__/plugins/jquery-weui/lib/fastclick.js"></script>
+<script>
+
+    $(function () {
+        FastClick.attach(document.body);
+        shop_id = "{$shop['id']}";
+        value = "{{$value}";
+        // 关闭手机窗口
+        $(document).on("click",".close-popup" , function () {
+            $('#tel').css('display','none');
+        })
+    });
+</script>
+<script src="__PUBLIC__/plugins/jquery-weui/js/jquery-weui.js"></script>
+<script src="__PUBLIC__/index/js/action.js"></script>
+</body>
+</html>

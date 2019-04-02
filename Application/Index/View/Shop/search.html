@@ -1,0 +1,20 @@
+<volist name="lists" id="vo">
+    <a href="{:U('Shop/shop', array('shop_id' => $vo['id']))}">
+        <li class="o-list__item c-shop-entry">
+            <div class="o-media">
+                <img class="o-media__img c-shop-entry__img" src="{$vo.logo}" alt="{$vo.name}">
+                <div class="o-media__body c-description">
+                    <div class="c-description__title">
+                        <div class="o-text-ellipsis">{$vo.name}</div>
+                    </div>
+                    <div class="c-description__body c-shop-entry__meta">
+                        <p class="c-shop-entry__name">
+                            <span class="brand-shop__menu-condition"><eq name="vo.status" value="on"><i class="fl icon-color">{$vo.status_cn}</i><else/><i class="fl">{$vo.status_cn}</i></eq><span>{$vo.class_id}</span></span>
+                        </p>
+                        <span>≤500km</span>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </a>
+</volist>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="__PUBLIC__/plugins/layui/css/layui.css" media="all" />
+		<link rel="stylesheet" href="__PUBLIC__/css/main.css" media="all">
+		<link rel="stylesheet" href="__PUBLIC__/plugins/font-awesome/css/font-awesome.min.css">
+	</head>
+
+	<body>
+		<div class="admin-main">
+			<blockquote class="layui-elem-quote">
+				<img src="/Public/images/default.jpg">
+				<div class="user-panel">
+					<p><span>上午好 ！ </span>{$Think.session.username}</p>
+					<p>级别：{$Think.session.gp_title}</p>
+					<p class="tag"><a href="javascript:;" id="userinfo"><i class="fa fa-user-circle" aria-hidden="true"></i> 个人信息</a><a href="javascript:;" id="lock"><i class="fa fa-lock" aria-hidden="true"></i> 锁屏</a>
+					<a href="javascript:;" id="logout"><i class="fa fa-sign-out" aria-hidden="true"></i> 注销</a></p>
+				</div>
+			</blockquote>
+			<div>
+				<fieldset class="layui-elem-field now-data" style="display:none">
+					<legend>当前数据</legend>
+				</fieldset>
+				<fieldset class="layui-elem-field">
+					<legend>常用面板</legend>
+					<ul class="used-panel">
+						<li>
+							<a href="javascript:;" data-title="菜品管理" data-icon="fa-cutlery" data-href="{:U('Food/addFood')}">
+								<span class="icon"><i class="fa fa-cutlery fa-4x" aria-hidden="true"></i></span>	
+								<strong class="title">新增菜品</strong>
+							</a>				
+						</li>
+						<li>
+							<a href="javascript:;" data-title="类型设置" data-icon="fa-list-ul" data-href="{:U('Type/addType')}">
+								<span class="icon"><i class="fa fa-list-ul fa-4x" aria-hidden="true"></i></span>	
+								<strong class="title">新增类型</strong>
+							</a>				
+						</li>
+						<li>
+							<a href="javascript:;" data-title="菜品管理" data-icon="fa-cutlery" data-href="{:U('Food/foodList')}">
+								<span class="icon"><i class="fa fa-list-ol fa-4x" aria-hidden="true"></i></span>	
+								<strong class="title">菜品列表</strong>
+							</a>				
+						</li>
+						<li>
+							<a href="javascript:;" data-title="类型设置" data-icon="fa-list-ul" data-href="{:U('Type/typeList')}">
+								<span class="icon"><i class="fa fa-list-ol fa-4x" aria-hidden="true"></i></span>	
+								<strong class="title">类型列表</strong>
+							</a>				
+						</li>					
+					</ul>
+				</fieldset>			
+			</div>
+		</div>
+		<script type="text/javascript" src="__PUBLIC__/plugins/layui/layui.js"></script>
+		<script>
+			layui.use('form', function(){
+				$ = layui.jquery;
+				now = new Date(),hour = now.getHours();
+				var obj = $('.user-panel').find('span');
+				if(hour < 6){$(obj).html("凌晨好！")} 
+				else if (hour < 9){$(obj).html("早上好！")} 
+				else if (hour < 12){$(obj).html("上午好！")} 
+				else if (hour < 14){$(obj).html("中午好！")} 
+				else if (hour < 17){$(obj).html("下午好！")} 
+				else if (hour < 19){$(obj).html("傍晚好！")} 
+				else if (hour < 22){$(obj).html("晚上好！")} 
+				else {$(obj).html("夜里好！")}
+				
+				$('#userinfo').on('click', function () {
+				
+					window.parent.userInfo();			
+				
+				});
+				$('#lock').on('click', function () {
+				
+					window.parent.lockMain();				
+				
+				});				
+				$('#logout').on('click', function () {
+				
+					window.parent.logout();				
+				
+				});
+				$('.used-panel li a').on('click', function () {
+					
+					$(this).each(function(){
+						console.log(window.parent)
+						window.parent.tab.tabAdd({
+							href: $(this).attr('data-href'),
+							icon: $(this).attr('data-icon'),
+							title: $(this).attr('data-title')
+						});	
+					});
+					
+				});
+
+			});		
+		</script>
+	</body>
+
+</html>

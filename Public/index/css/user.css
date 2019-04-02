@@ -1,0 +1,153 @@
+
+/**y用户*/
+.user{
+	margin: 0rem;
+	margin-bottom: 0rem;
+	background-color: #fff;
+	text-align: center;
+	font-size: 1.5rem;
+	line-height: 1.5rem;
+	height: 15.375rem;
+	border: 0.1rem solid #4E5465;
+}
+
+.user_logo{
+	float: left;
+	margin: 0 auto;
+	margin-top: 3rem;
+	border-radius:3rem;
+	-moz-border-radius:3rem;
+	-ms-border-radius:3rem;
+	-o-border-radius:3rem;
+	/*background-color: #00F7DE;*/
+	/*border: 1px solid #ff0000*/
+}
+.user_logo img{
+	margin: 0 auto;
+	width: 6rem;
+	height: 6rem;
+	text-align: center;
+	border-radius:3rem;
+	-moz-border-radius:3rem;
+	-ms-border-radius:3rem;
+	-o-border-radius:3rem;
+	background-color: #00F7DE;
+
+}
+
+.user_name{
+	float: right;
+	margin: 0 auto;
+	margin-top: 1.6rem;
+	text-align: center;
+	font-size: 2rem;
+	font-weight: bold;
+	margin-bottom: 1.6rem;
+
+}
+/*用户*/
+.ui_li{
+	margin-top: 2rem;
+}
+.nav_div{
+	margin: 0 auto;
+	margin: 1rem;
+	margin-top: 2rem;
+	text-align: left;
+	font-size: 1.2rem;
+	font-weight: bold;
+	line-height: 1.5rem;
+	border: 0rem;
+	border-bottom: 0.2rem solid #0C0C0C;
+
+}
+
+.user_form{
+	margin: 0.2rem;
+	margin-top: 0.6rem;
+}
+.layui-input_layui-btn{
+	margin: 0 auto;
+
+}
+.layui_btn{
+	width: 80%;
+	margin: 0 auto;
+	margin-left: 10%;
+}
+/*订单中心*/
+.order{
+	margin: 0.2rem;
+	margin-top: 0.6rem;
+}
+.order_nav{
+	margin: 0 auto;
+	text-align: center;
+	white-space:nowrap;
+	font-weight: bold;
+	color: #666666;
+}
+.layui-nav{
+	background-color: #ffffff;
+	color: #666666;
+}
+.layui-nav-item{
+	text-align: center;
+}
+.layui-nav-item a{
+	font-size: 1.4rem !important;
+	color: #4E5465 !important;
+}
+.order_li{
+	margin-top: 1rem;
+	font-size: 0.8rem ;
+	font-weight: bold;
+	line-height: 1.2rem;
+}
+.order_li_shopname{
+	color: #000;
+	font-size: 1.4rem;
+	font-weight: bolder;
+}
+.order_li_time{
+	margin-top: 1rem;
+}
+/*收货地址*/
+.user_address{
+	margin: 0.2rem;
+	margin-top: 0.6rem;
+}
+.user_address_li{
+	margin-left: 0.6rem;
+	//word-break:keep-all;           /* 不换行 */
+	//white-space:nowrap;          /* 不换行 */
+	font-size: 0.8rem;
+	color: #000;
+	font-weight: bold;
+	overflow:hidden;               /* 内容超出宽度时隐藏超出部分的内容 */
+	text-overflow:ellipsis;         /* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+}
+.user_address_li_name{
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+	font-size: 1.2rem;
+	color: #8B8986;
+	font-weight: 400;
+
+}
+.user_address_li_tel{
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+
+}
+.user_address_li_addr{
+	overflow:hidden;               /* 内容超出宽度时隐藏超出部分的内容 */
+	text-overflow:ellipsis;         /* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+	margin-bottom: 0.5rem;
+}
+
+.user_address_li_i{
+	margin: 0 auto;
+	font-size: 2rem;
+	line-height: 2rem;
+}

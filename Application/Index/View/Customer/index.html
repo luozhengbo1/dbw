@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{:C('WEB_TITLE')}</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="__PUBLIC__/plugins/jquery-weui/css/gobal.css">
+    <link rel="stylesheet" href="__PUBLIC__/plugins/jquery-weui/lib/weui.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/plugins/jquery-weui/css/jquery-weui.css">
+    <link rel="stylesheet" href="__PUBLIC__/index/css/themeV1.0.css">
+</head>
+<body ontouchstart>
+<div id="app-placeholder" class="transparent-container">
+    <div data-reactroot="" class="o-flex o-bg-grey brand-index">
+        <div class="brand-index__bg brand-index--before" id="brand-index--before">
+            <img class="bg__img" src="{$merchantInfo.bg_img}">
+        </div>
+        <div class="brand-index__bg brand-index--after" id="brand-index--after" style="opacity: 0.2;"></div>
+        <div class="brand-index__bottom" id="brand-index__bottom" style="opacity: 1;">
+            <div class="bottom__header">
+                <img class="bottom__header--img" src="{$merchantInfo.bg_img}">
+                <div class="bottom__header--bg__line">
+                    <div class="bottom__header--bg__liner"></div>
+                </div>
+            </div>
+            <p class="bottom__title">欢迎来到:{$merchantInfo.name}{$eatType}（V1.0测试版）</p>
+            <div class="bottom15">&nbsp;</div>
+            <div class="bottom__menu">
+                <div class="menu-list">
+                    <div class="item"><a href="{:U('Shop/lists/eat_type/in_shop')}"><i class="icon icon-TS"></i><span>堂食</span></a></div>
+                    <div class="item"><a href="{:U('Shop/lists/eat_type/in_home')}"><i class="icon icon-WM"></i><span>外卖</span></a></div>
+                    <!--
+                    <div class="item"><a href="javascript:void(0)"><i class="icon icon-YD"></i><span>预订</span></a></div>
+                    <div class="item"><a href="javascript:void(0)"><i class="icon icon-PD"></i><span>排队</span></a></div>
+                    <div class="item"><a href="javascript:void(0)"><i class="icon icon-HY"></i><span>会员</span></a></div>
+                    -->
+                    <div class="item"><a href="{:U('Customer/lists')}"><i class="icon icon-WD"></i><span>个人中心</span></a>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom15">&nbsp;</div>
+            <div class="bottom__block"></div>
+            <div class="brand-shop o-credit o-credit--brand-index"><p class="brand-shop__title">人气门店</p>
+                <ul class="brand-shop__list">
+                    <!-- 人气门店 -->
+                    <volist name="lists" id="vo">
+                        <li><a href="{:U('FoodClass/lists', array('shop_id' => $vo['id']))}" class="clearfix">
+                            <img class="brand-shop__list-label fl" src="{$vo.logo}">
+                            <div class="brand-shop__menu-icon fr">
+                                <i title="WM"></i><i title="TS"></i></i>
+                                <!--## ====支持点餐类型 ===##--->
+                                <!--   <i title="WM"></i><i title="TS"></i><i title="YD"></i><i title="PD"></i>   -->
+                            </div>
+                            <div class="brand-shop__menu-detail clearfi">
+                                <h3 class="brand-shop__text-omit">{$vo.name}</h3>
+                                <div class="brand-shop__menu-condition"><i class="fl icon-color">{$vo.class_id}</i><span>{$vo.addres}</span></div>
+                            </div>
+                        </a></li>
+                    </volist>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!--导航菜单-->
+<div class="navin">
+    <div class="floating-nav-container" style="z-index: 99">
+        <div class="nav-items">
+            <div class="item"><a href="{:U('shop/index')}"><i class="icon icon-menu"></i>首页</a></div>
+            <div class="item"><a href="{:U('Customer/lists')}"><i class="icon icon-personal"></i>个人中心</a></div>
+            <div class="item"><a href="{:U('Shop/lists/eat_type/1')}"><i class="icon icon-card"></i>堂食</a></div>
+            <div class="item"><a href="{:U('Shop/lists/eat_type/2')}"><i class="icon icon-order-list"></i>外带</a></div>
+        </div>
+        <div class="expand-control">
+            <button style="z-index: 100"><span class="navText">快速导航</span><i class="icon iconI icon-double-arrow-right"></i></button>
+        </div>
+    </div>
+</div>
+</body>
+<script src="__PUBLIC__/plugins/jquery-weui/lib/jquery-2.1.4.js"></script>
+<script src="__PUBLIC__/plugins/jquery-weui/lib/fastclick.js"></script>
+<script>
+    /*
+    $(function () {
+        FastClick.attach(document.body);
+        shop_id = "{$shop['id']}";
+        value = "{{$value}";
+        // 点击获取食品列表
+        $(".dish-type-list li").on("click", function () {
+            var class_id = $(this).attr('data-classid');
+            $.ajax({
+                type: "post",
+                url: "http://blog.istiny.cc/index.php/Food/lists",
+                data: {"class_id": class_id, shop_id: shop_id},
+                cache: false,
+                async: false,
+                dataType: "json",
+                success: function (data, textStatus, jqXHR) {
+                    $(".dish-list").html("");
+                    $(".dish-list").append(data);
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert("请求失败！");
+                }
+            });
+        });
+    });
+    */
+</script>
+<script src="__PUBLIC__/plugins/jquery-weui/js/jquery-weui.js"></script>
+<script src="__PUBLIC__/index/js/action.js"></script>
+</body>
+</html>

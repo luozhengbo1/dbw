@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>点餐</title>
+    <link href="__PUBLIC__/css/order.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="firstLine">
+        <div class="oneLineShow titlePosition">微信点餐</div>
+        <a   href="{:U('Order/order')}" class="oneLineShow" style="margin-left: 20px; ">
+            <button class="modelBtn" style="background-color: #FF7200;border:none;">运营模式</button>
+        </a>
+        <a  href="{:U('Order/lists')}" class="oneLineShow" style="margin-left: 10px">
+            <button class="modelBtn">管理模式</button>
+        </a>
+    </div>
+    <div class="secondBlock">
+        <a href="{:U('Order/order')}" class="leftPadding">
+            <button class="stateBtn" style="<?php  echo ($_GET['order_status']==0)?'background-color: #FF7200;border:none;':'' ;?> ">进行中</button>
+        </a>
+        <a href="{:U('Order/orderFinishOrDoing',array('order_status'=>1))}" style="margin-left: 10px">
+            <button class="stateBtn" style="<?php  echo ($_GET['order_status']==1)?'background-color: #FF7200;border:none;':'' ;?> ">已完成</button>
+        </a>
+        <a href="{:U('Order/orderFinishOrDoing',array('order_status'=>1))}">
+            <span class="rightAlignment" style="margin-right: 20px;font-size: 25px;">已完成订单数：{$orderFinishCount}个</span>
+        </a>
+    </div>
+    <div id="orderData">
+        <volist name="orderData" id="vo">
+            <div class="orderItem">
+            <h1 class="orderTitle">订单{$vo['id']}</h1>
+            <div class="leftAndRightText topMarginTwenty">
+                <span class="oneLineShow leftPadding">订单编号：</span>
+                <span class="rightAlignment rightMarginTwenty">{$vo['order_id']}</span>
+            </div>
+            <div class="leftAndRightText topMarginTen">
+                <span class="oneLineShow leftPadding">交易时间：</span>
+                <span class="rightAlignment rightMarginTwenty">{$vo['pay_time']}</span>
+            </div>
+            <hr class="separatorLine" size=1 style="margin-top: 12px;">
+            <h1 class="totalCount">共<?php echo count($vo['buy_list']) ;?>份</h1>
+                <volist name="vo['buy_list']"  id="buy_list">
+                <div class="productLine">
+                    <span class="oneLineShow productName">{$buy_list['name']}</span>
+                    <span class="oneLineShow productCount">x{$buy_list['num']}</span>
+                    <span class="rightAlignment productMoney">￥<?php echo $buy_list['price']*$buy_list['num']?></span>
+                </div>
+                </volist>
+            <hr class="separatorLine" size=1 style="margin-top: 8px;">
+            <h1 class="rightAlignment" style="font-size: 17px;margin-top: -1px;margin-right: 15px">合计：￥{$vo['price']}</h1>
+            <div class="leftAndRightText" style="margin-top: 150px">
+                <span class="oneLineShow leftPadding">订单状态：</span>
+                <span class="rightAlignment rightMarginTwenty">{$vo['pay_status_cn']}</span>
+            </div>
+            <div class="leftAndRightText topMarginTwenty">
+                <span class="oneLineShow leftPadding">取餐码</span>
+                <span class="rightAlignment rightMarginTwenty">{$vo['eating_code']}</span>
+            </div>
+            <div class="leftAndRightText topMarginTwenty">
+                <span class="oneLineShow leftPadding">就餐桌台</span>
+                <span class="rightAlignment rightMarginTwenty">{$vo['table_num']}</span>
+            </div>
+            <div class="leftAndRightText topMarginTwenty">
+                <span class="oneLineShow leftPadding">是否取餐</span>
+                <span class="rightAlignment rightMarginTwenty">{$vo['order_status_cn']}</span>
+            </div>
+            <div style="margin-top: 30px" data-id="{$vo['id']}">
+                <if condition="$vo['order_status'] eq 1">
+                    <h1 style="text-align: right;margin-right: 15px;margin-bottom: 10px;font-size: 17px">订单已完成</h1>
+                    <else />
+                    <span class="oneLineShow leftPadding" style="font-size: 18px;">订单是否完成：</span>
+                    <button class="rightAlignment yesBtn">是</button>
+                </if>
+            </div>
+        </div>
+        </volist>
+    </div>
+    <div style="clear:both"></div>
+    <!--<h1 class="bottomTip">您有新的订单！！！</h1>-->
+    <script src="__PUBLIC__/plugins/jquery-weui/lib/jquery-2.1.4.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/plugins/layui/layui.js"></script>
+    <script>
+        layui.use(['layer','jquery'], function(){
+                var layer = layui.layer;
+                var $=layui.jquery;
+               
+
+            $(document).on("click", '.yesBtn',function () {
+                var that = $(this);
+                var order_id =that.parent().attr('data-id');
+                console.log(order_id)
+                if( !order_id ){
+                    layer.msg("缺少订单ID");
+                    return false;
+                }
+                $.ajax({
+                    type:'post',
+                    url:"{:U('Order/orderFinishFlag')}",
+                    data:{'id':order_id},
+                    dataType:'json',
+                    async:false,
+                    success:function (res) {
+                        if(res.status ==200){
+                           layer.msg(res.msg);
+                            that.parent().parent().fadeOut("slow");
+                            $.ajax({
+                                type:'POST',
+                                async:false,
+                                url:"{:U('Order/orderTheme')}",
+                                data:'',
+                                dataType:'json',
+                                success:function (data) {
+                                    $('#orderData').html("");
+                                    $('#orderData').append(data);
+                                }
+                            })
+                        }else{
+                            layer.msg(res.msg);
+                            location.reload();
+                        }
+                    },
+                    error:function () {
+                       layer.msg('请求失败');
+
+                    }
+
+                })
+            })
+        });
+    </script>
+</body>
+</html>

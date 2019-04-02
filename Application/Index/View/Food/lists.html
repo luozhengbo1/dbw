@@ -1,0 +1,27 @@
+<volist name="lists" id="vo">
+    <li class="dish-item-dish"
+        style="position: absolute; width: 100%; top:{$i*90-90}px; left: 0px; height: 90px; <if condition='count($lists) eq $i'>margin-bottom:60px;</if> ">
+        <div class="dish-on-selling">
+            <div class="dish-list-item">
+                <if condition="$vo.logo eq ''"><div class="dish-item-img dish-img-default"></div> <else />  <div class="dish-item-img" style="background-image: url({$vo.logo})"></div> </if>
+                <div class="dish-item-content">
+                    <div class="dish-item-fill"><span class="dish-item-name">{$vo.name}{$n}</span></div>
+                    <div class="dish-item-bottom">
+                        <div class="dish-price-container">
+                            <span class="dish-item-price">
+                                <span class="dish-item-price-number dish-item-price-nosub price">{$vo.price}</span>
+                            </span>
+                            <if condition="$shop.status eq 'on'"><!-- 商店打样--->
+                            <div class="counter counter-min--nonum">
+                                <a class="counter-minus" <if condition="$vo.num elt 0">style="display:none;"</if> data-id="{$vo.id}"><span class="counter-click-mask"></span></a>
+                                <span class="counter-num" style="min-width: 35px; z-index: 11;"><if condition="$vo.num gt 0">{$vo.num}</if></span>
+                                <a class="counter-add" data-id="{$vo.id}"><span class="counter-click-mask"></span></a>
+                            </div>
+                            </if>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+</volist>

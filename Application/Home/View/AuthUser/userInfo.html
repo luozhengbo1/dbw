@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>{:C('WEB_TITLE')}</title>
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="format-detection" content="telephone=no">
+
+		<link rel="stylesheet" href="__PUBLIC__/plugins/layui/css/layui.css" media="all" />
+		<link rel="stylesheet" href="__PUBLIC__/plugins/font-awesome/css/font-awesome.min.css">
+	</head>
+
+	<body>
+		<div style="margin: 15px;">
+			<fieldset class="layui-elem-field">
+				<legend>个人信息</legend>
+
+			<form class="layui-form" style="margin: 15px;">
+				<div class="layui-form-item">
+					<label class="layui-form-label">头像：</label>
+					<div class="layui-input-block">
+						<img src="/Public/images/default.jpg" width="100" height="100">
+					</div>					
+				</div>			
+				<div class="layui-form-item">
+					<label class="layui-form-label">用户名：</label>
+					<div class="layui-input-inline">
+						<input type="text" value="{$userList['username']}" class="layui-input" disabled>
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">用户组：</label>
+					<div class="layui-input-inline">
+						<input type="text" value="{$userList['title']}" class="layui-input" disabled>
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">状态：</label>
+					<div class="layui-input-block">
+						<input type="checkbox" name="status" lay-skin="switch" <if condition="$userList['status'] eq 1">checked="true"</if> disabled>
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<div class="layui-input-block">
+					</div>
+				</div>
+			</form>
+			</fieldset>
+		</div>
+		<script type="text/javascript" src="__PUBLIC__/plugins/layui/layui.js"></script>
+		<script>
+		layui.use(['form']);
+		</script>
+	</body>
+
+</html>

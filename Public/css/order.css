@@ -1,0 +1,108 @@
+body {
+    width: 100%;
+    height: 100%;
+}
+.firstLine {
+    height: 30px;
+    width: 100%;
+}
+.screenWidth {
+    width: 100%;
+}
+.leftAndRightText {
+    width: 100%;
+    height: 15px;
+}
+.totalCount {
+    text-align: right;
+    margin-right: 15px;
+    font-size: 15px;
+    margin-top: -1px;
+    height: 15px;
+}
+.topMarginTen {
+    margin-top: 10px;
+}
+.topMarginTwenty {
+    margin-top: 20px;
+}
+.rightMarginTwenty {
+    margin-right: 20px;
+}
+.oneLineShow {
+    float: left;
+    position:relative;
+}
+.productLine {
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    height: 20px;
+}
+.productName {
+    /*width: 33%;*/
+}
+.productCount {
+    width: 33%;
+    text-align: center;
+}
+.productMoney {
+    width: 33%;
+    text-align: right;
+}
+.rightAlignment {
+    float: right;
+    position:relative;
+}
+.titlePosition {
+    color:black;
+    margin-left: 20px;
+    font-size: 20px;
+}
+.modelBtn {
+    width: 100px;
+    height: 30px;
+}
+.secondBlock {
+    margin-top: 20px;
+    width: 100%;
+    height: 40px
+}
+.stateBtn {
+    width: 130px;
+    height: 40px;
+    font-size: 20px
+}
+.orderItem {
+    border: 1px solid black;
+    width: 31%;
+    margin-top: 30px;
+    margin-left: 10px;
+    margin-right: 10px;
+    float: left;
+    background-color: bisque;
+}
+.orderTitle {
+    font-size: 20px;
+    margin-left: 10px
+}
+.leftPadding {
+    margin-left: 20px;
+}
+.separatorLine {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.yesBtn {
+    width: 140px;
+    height: 40px;
+    margin-top: -8px;
+    margin-right: 15px;
+    margin-bottom: 5px;
+}
+.bottomTip {
+    margin-top: 100px;
+    margin-right: 30px;
+    text-align: right;
+    font-size: 18px;
+}

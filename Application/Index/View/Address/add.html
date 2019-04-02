@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{:C('WEB_TITLE')}</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="__PUBLIC__/plugins/jquery-weui/css/gobal.css">
+    <link rel="stylesheet" href="__PUBLIC__/plugins/jquery-weui/lib/weui.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/plugins/jquery-weui/css/jquery-weui.css">
+    <link rel="stylesheet" href="__PUBLIC__/index/css/themeV1.0.css">
+</head>
+<body ontouchstart>
+<include file="Public/ServerConf" />
+<form class="formData"> <!--  action="{:U('Address/add')}" method="post"  -->
+    <div id="app-placeholder" class="transparent-container">
+        <div data-reactroot="" class="o-credit">
+            <div>
+                <ul class="o-list o-border--bottom">
+                    <li class="o-list__item c-option">
+                        <div class="c-option__title">姓名</div>
+                        <div class="c-option__body">
+                            <input type="text" name="name" placeholder="请输入姓名" maxlength="30" value="{$data.name}"></div>
+                    </li>
+                    <li class="o-list__item c-option">
+                        <div class="c-option__title">性别</div>
+                        <div class="c-option__body customer-gender">
+                            <div class="c-sex-switch">
+                                <div class="c-sex-switch__label">
+                                    <input class="c-sex-switch__radio <eq name='data.sex' value='1'>c-sex-switch__radio--selected</eq>" type="radio" value="1" name="sex">
+                                    <span class="c-sex-switch__title">女士</span></div>
+                                <div class="c-sex-switch__label">
+                                    <input class="c-sex-switch__radio <eq name='data.sex' value='2'>c-sex-switch__radio--selected</eq>" type="radio" value="2" name="sex" checked>
+                                    <span class="c-sex-switch__title">先生</span></div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="o-list__item c-option">
+                        <div class="c-option__title">联系电话</div>
+                        <div class="c-option__body">
+                            <input type="tel" name="mobile" maxlength="11" placeholder="请输入手机号码" value="{$data.mobile}"></div>
+                    </li>
+                    <li class="o-list__item c-option">
+                        <div class="c-option__title">收货地址</div>
+                        <div class="c-option__body">
+                            <input type="text" name="address" class="home-city" placeholder="请选择收货地址" value="{$data.address}" onclick="this.blur()"type="radio">
+                        </div>
+                        <div class="c-option__ending"><i class="o-icon-arrow--right"></i></div>
+                    </li>
+                    <li class="o-list__item c-option">
+                        <div class="c-option__title">街道信息</div>
+                        <div class="c-option__body">
+                            <input type="text" name="street" placeholder="请输入门牌信息" value="{$data.street}">
+                        </div>
+                    </li>
+                    <li class="o-list__item c-option">
+                        <div class="c-option__title">备注</div>
+                        <div class="c-option__body">
+                            <input type="text" name="remark" placeholder="其他备注信息" value="{$data.remark}">
+                        </div>
+                    </li>
+                </ul>
+                <div class="o-btn-container">
+                    <button id="submit" type="submit" class="o-btn o-btn--block o-btn--h44 o-btn--rounded o-btn--primary">保存地址</button>
+                    <!--<a class="o-btn o-btn--block o-btn--h44 o-btn--rounded o-btn--danger">删除地址</a>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<!--导航菜单-->
+<div class="navin">
+    <div class="floating-nav-container" style="z-index: 99">
+        <div class="nav-items">
+            <div class="item"><a href="{:U('shop/index')}"><i class="icon icon-menu"></i>首页</a></div>
+            <div class="item"><a href="{:U('Customer/lists')}"><i class="icon icon-personal"></i>个人中心</a></div>
+            <div class="item"><a href="{:U('Shop/lists/eat_type/1')}"><i class="icon icon-card"></i>堂食</a></div>
+            <div class="item"><a href="{:U('Shop/lists/eat_type/2')}"><i class="icon icon-order-list"></i>外带</a></div>
+        </div>
+        <div class="expand-control">
+            <button style="z-index: 100"><span class="navText">快速导航</span><i class="icon iconI icon-double-arrow-right"></i></button>
+        </div>
+    </div>
+</div>
+</body>
+<script src="__PUBLIC__/plugins/jquery-weui/lib/jquery-2.1.4.js"></script>
+<script src="__PUBLIC__/plugins/jquery-weui/lib/fastclick.js"></script>
+<script src="__PUBLIC__/plugins/jquery-weui/js/jquery-weui.js"></script>
+<script src="__PUBLIC__/plugins/jquery-weui/js/city-picker.min.js"></script>
+<script src="__PUBLIC__/index/js/action.js"></script>
+<script>
+    /*地址选着器*/
+    $(".home-city").cityPicker({
+        title: "选择城市",
+        showDistrict: true,
+        onChange: function (picker, values, displayValues) {
+            //console.log(values, displayValues);
+        }
+    });
+    /*表单提交*/
+    formSubmit("Address/add");
+</script>
+</body>
+</html>

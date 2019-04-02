@@ -1,0 +1,157 @@
+body{
+	background: #F1F2F7;
+}
+
+/*广告信息*/
+.top_ad_text{
+	position: absolute;
+	top: 70%;
+	left: 0;
+	right: 0;
+    color: #009688;
+	font-size: 1.2rem;
+}
+img.topad{
+	width: 100%;
+	height: 100%;
+}
+
+/**快捷菜单*/
+.menu{
+	margin: 0.2rem;
+	margin-bottom: 0rem;
+	background-color: #fff;
+	text-align: center;
+	font-size: 1.5rem;
+	line-height: 1.5rem;
+
+}
+.menu_li{
+	margin: 0.2rem;
+	background-color: #8B8986;
+
+}
+.layui-col-xs4.menu_li.po.fr{
+	margin: 0.2rem;
+	margin-top: -3.5rem;
+	margin-left: 0rem;
+	height: 7rem;
+}
+
+.menu_li_logo{
+	float: left;
+	margin: 0 auto;
+	margin-top: 0.6rem;
+	height: 2rem;
+	border-radius:1rem;
+	-moz-border-radius:1rem;
+	-ms-border-radius:1rem;
+	-o-border-radius:1rem;
+	/*background-color: #00F7DE;*/
+	/*border: 1px solid #ff0000*/
+}
+.menu_li_logo img{
+	margin: 0 auto;
+	width: 2rem;
+	height: 2rem;
+	text-align: center;
+	font-size: 0.5rem;
+	border-radius:1rem;
+	-moz-border-radius:1rem;
+	-ms-border-radius:1rem;
+	-o-border-radius:1rem;
+	background-color: #00F7DE;
+
+}
+
+.menu_li_name{
+	float: right;
+	margin: 0 auto;
+	margin-top: 1rem;
+	margin-bottom: 0.6rem;
+	text-align: center;
+
+}
+
+/*门店信息*/
+.layui-elem-quote{
+	height: 2rem !important;
+	padding: 0.2rem !important;
+	margin-top: -0.4rem !important;
+	margin-bottom: -0.4rem; !important;
+	background-color: #fff;
+
+}
+.brand-shop{
+	color: #333333;
+	margin:  0 auto;
+	padding: 0 auto;
+	margin: 0.2rem;
+	font-size: 1rem;
+	line-height: 1rem;
+	margin-bottom: 0.6rem;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	background-color: #fff;
+}
+.brand-shop_name{
+	white-space: nowrap;
+	font-size: 1.2rem;
+}
+.brand-shop_li {
+	margin-top: 10px;
+	height: 80px;
+	background-color: #8B8986;
+
+}
+.shop_li_logo{
+	margin: 0 auto;
+	width: 70px;
+	height: 70px;
+	border-radius:35px;
+	-moz-border-radius:35px;
+	-ms-border-radius:35px;
+	-o-border-radius:35px;
+	margin-top: 5px;
+  background-color: #00F7DE;
+}
+.shop_li_logo img{
+	margin: 0 auto;
+	width: 70px;
+	height: 70px;
+	border-radius:35px;
+	-moz-border-radius:35px;
+	-ms-border-radius:35px;
+	-o-border-radius:35px;
+}
+.shop_mame{
+	margin-top: 1rem;
+	margin-bottom: 0.5rem;
+	line-height: 1rem;
+	font-size: 1.2rem;
+}
+.shop_mame_status{
+	color: #fff;
+	line-height: 1rem;
+	font-size: 1rem;
+	vertical-align: middle;
+	margin-top: 1rem;
+	margin-bottom: 0.5rem;
+}
+.shop_type{
+	margin-top: 20px;
+	text-align: center;
+	text-overflow : ellipsis;
+}
+.shop_time_distancey{
+	font-size: 0.32rem;
+	line-height: 1rem;
+	margin-top: 1rem;
+	margin-bottom: 0.5rem;
+	color: #656565;
+	text-align: center;
+}
+.layui-col-space{
+	
+}

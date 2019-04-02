@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>微信点餐V1.0</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="__PUBLIC__/plugins/jquery-weui/css/gobal.css">
+    <link rel="stylesheet" href="__PUBLIC__/plugins/jquery-weui/lib/weui.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/plugins/jquery-weui/css/jquery-weui.css">
+    <link rel="stylesheet" href="__PUBLIC__/index/css/themeV1.0.css">
+</head>
+<body ontouchstart>
+<div id="app-placeholder" class="transparent-container">
+    <div data-reactroot="" class="order-page">
+        <div class="o-flex c-tabs">
+            <div class="o-flex__fluid c-tabs__item <if condition='$Think.get.eat_type eq 1'>c-tabs__item--active</if>"><span class="o-text-ellipsis">堂食</span></div>
+            <div class="o-flex__fluid c-tabs__item <if condition='$Think.get.eat_type eq 2'>c-tabs__item--active</if>"><span class="o-text-ellipsis">外卖</span></div>
+            <!--
+            <div class="o-flex__fluid c-tabs__item"><span class="o-text-ellipsis">预订</span></div>
+            <div class="o-flex__fluid c-tabs__item"><span class="o-text-ellipsis">排队</span></div>
+            -->
+        </div>
+        <div id="myScroll" class="order-conent">
+            <div class="records" style="transform: translate(0px, 0px) translateZ(0px);">
+                <div>
+                   <volist name="lists" id="vo">
+                        <div class="order-list-group">
+                            <div>
+                                <div class="list-head clearfix">
+                                    <span class="list-head-status ellipsis"><i>已取消</i></span>
+                                    <a class="list-head-href" href=""><img class="list-head-img" src="" role="presentation">
+                                        <span class="list-head-title ellipsis">贵州民俗文化美食城</span>
+                                    </a>
+                                </div>
+                                <div class="list-content clearfix">
+                                    <div class="list-num">
+                                        <p class="list-num-name">流水号</p>
+                                        <p class="list-num-no ellipsis">3</p>
+                                    </div>
+                                    <div class="list-detail">
+                                        <p>
+                                            <span class="list-detail-dish ellipsis">菠萝啤小号菠萝杯等 共5件 商品</span>
+                                            <span class="list-detail-price price ellipsis">148</span>
+                                        </p>
+                                        <p class="list-detail-time">2018/03/14 13:09</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </volist>
+                </div>
+                <div class="copyright-bt">泛亚信通提供技术支持</div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--导航菜单-->
+<div class="navin">
+    <div class="floating-nav-container" style="z-index: 99">
+        <div class="nav-items">
+            <div class="item"><a href="{:U('shop/index')}"><i class="icon icon-menu"></i>首页</a></div>
+            <div class="item"><a href="{:U('Customer/lists')}"><i class="icon icon-personal"></i>个人中心</a></div>
+            <div class="item"><a href="{:U('Shop/lists/eat_type/1')}"><i class="icon icon-card"></i>堂食</a></div>
+            <div class="item"><a href="{:U('Shop/lists/eat_type/2')}"><i class="icon icon-order-list"></i>外带</a></div>
+        </div>
+        <div class="expand-control">
+            <button style="z-index: 100"><span class="navText">快速导航</span><i class="icon iconI icon-double-arrow-right"></i></button>
+        </div>
+    </div>
+</div>
+</body>
+<script src="__PUBLIC__/plugins/jquery-weui/lib/jquery-2.1.4.js"></script>
+<script src="__PUBLIC__/plugins/jquery-weui/lib/fastclick.js"></script>
+<script>
+    /*
+    $(function () {
+        FastClick.attach(document.body);
+        shop_id = "{$shop['id']}";
+        value = "{{$value}";
+        // 点击获取食品列表
+        $(".dish-type-list li").on("click", function () {
+            var class_id = $(this).attr('data-classid');
+            $.ajax({
+                type: "post",
+                url: "http://blog.istiny.cc/index.php/Food/lists",
+                data: {"class_id": class_id, shop_id: shop_id},
+                cache: false,
+                async: false,
+                dataType: "json",
+                success: function (data, textStatus, jqXHR) {
+                    $(".dish-list").html("");
+                    $(".dish-list").append(data);
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert("请求失败！");
+                }
+            });
+        });
+    });
+    */
+</script>
+<script src="__PUBLIC__/plugins/jquery-weui/js/jquery-weui.js"></script>
+<script src="__PUBLIC__/index/js/action.js"></script>
+</body>
+</html>

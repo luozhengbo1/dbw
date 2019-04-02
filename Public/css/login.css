@@ -1,0 +1,118 @@
+body {
+	width:1200px;
+	margin: 0px auto;
+ 	background: #f2f2f2 url(../images/login-bg.jpg) no-repeat top center;
+	/*background-color: #393D49;*/
+}
+.header{
+	
+	margin-top:30px;
+	
+}
+.login-box {
+	width: 350px;
+    margin: 200px auto 20px auto;
+/* 	background-color: rgba(255, 255, 255, 0.407843);*/
+	background-color: #ffffff;
+	box-shadow: 1px 1px 1px #ccc;
+	color: #666;
+}
+
+.login-box header {
+	height: 39px;
+	padding: 20px 10px 0px;
+}
+
+.login-box header h1 {
+	text-align: center;
+	font-size: 22px;
+	line-height: 40px;
+}
+
+.login-box .login-main {
+	padding: 10px 30px 10px;
+}
+
+.login-main .layui-form-item {
+	position: relative;
+}
+.layui-input:focus{
+	
+	border-color: #ff7200!important;
+}
+.layui-input:focus .layui-icon{
+	
+	color:#ff7200;
+}
+.login-main .layui-form-item .login-icon {
+	position: absolute;
+	color: #cccccc;
+	top: 10px;
+	left: 10px;
+	transition: color 0.2s linear;
+}
+
+.login-main .layui-form-item input {
+	padding-left: 34px;
+}
+
+.login-box footer {
+	height: 35px;
+	padding: 10px 10px 0 10px;
+}
+
+.login-box footer p {
+	line-height: 35px;
+	text-align: center;
+}
+.clear {
+	clear: both;
+}
+
+.login-remember {
+	line-height: 38px;
+}
+
+.login-remember .layui-form-switch {
+	margin-top: 0px;
+}
+
+.login-code-box {
+	position: relative;
+	padding: 10px;
+}
+
+.login-code-box input {
+	position: absolute;
+	width: 100px;
+}
+
+.login-code-box img {
+	cursor: pointer;
+	position: absolute;
+	left: 115px;
+	height: 38px;
+}
+#verifyImg{
+	width:150px;
+	height:35px;
+	margin-right: 10px;
+	cursor:pointer;
+	
+}
+#verifyCheckImg{
+	position: relative;
+	top:5px;
+	left:15px;
+	font-size:22px;
+}
+.footer{
+	
+	text-align:center;
+	padding-bottom:50px;
+}
+.footer p{
+   
+	color: #ffffff;	
+	
+}

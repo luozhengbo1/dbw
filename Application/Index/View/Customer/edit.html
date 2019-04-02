@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{:C('WEB_TITLE')}</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="__PUBLIC__/plugins/jquery-weui/css/gobal.css">
+    <link rel="stylesheet" href="__PUBLIC__/plugins/jquery-weui/lib/weui.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/plugins/jquery-weui/css/jquery-weui.css">
+    <link rel="stylesheet" href="__PUBLIC__/index/css/themeV1.0.css">
+</head>
+<body ontouchstart>
+    <div id="app-placeholder" class="transparent-container">
+        <div data-reactroot="" class="o-bg-grey o-pt o-credit">
+            <form class="formData">
+                <ul class="o-list o-border--top o-border--bottom">
+                    <div>
+                        <li class="o-list__item c-option">
+                            <div class="c-option__title">姓名</div>
+                            <div class="c-option__body">
+                                <input type="text" name='name' maxlength="30" placeholder="请输入姓名" value="{$data.name}" autofocus>
+                            </div>
+                        </li>
+
+                        <li class="o-list__item o-list__item--last-border c-option">
+                            <div class="c-option__title">性别</div>
+                            <div class="c-option__body">
+                                <div class="c-sex-switch">
+                                    <div class="c-sex-switch__label">
+                                        <input class="c-sex-switch__radio <eq name='data.sex' value='1'>c-sex-switch__radio--selected</eq>" readonly="readonly"  onclick="this.blur()"type="radio" value="1" name="sex">
+                                        <span class="c-sex-switch__title">女士</span>
+                                    </div>
+                                    <div class="c-sex-switch__label">
+                                        <input class="c-sex-switch__radio <eq name='data.sex' value='2'>c-sex-switch__radio--selected</eq>" readonly="readonly"  onclick="this.blur()"type="radio" value="2" name="sex" checked>
+                                        <span class="c-sex-switch__title">先生</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </div>
+                    <div>
+                        <li class="o-list__item c-option no-birthday">
+                            <div class="c-option__title">生日</div>
+                            <div class="c-option__body">
+                                <input class="weui-input yearMD" name="birthday" type="text" readonly="readonly" readonly="readonly"  onclick="this.blur()"value="{$data.birthday} 日"/>
+                            <div class="c-option__ending"><i class="o-icon-arrow--right"></i></div>
+                            </div>
+                        </li>
+                        <!--
+                        <a class="o-list__item o-list__item--last-border c-option" href="">
+                            <div class="c-option__title">修改密码</div>
+                            <div class="c-option__ending"><i class="o-icon-arrow--right"></i></div>
+                        </a>
+                        -->
+                    </div>
+                </ul>
+                <ul class="o-list o-border--top o-border--bottom">
+                    <div>
+                        <a class="o-list__item c-option">
+                            <div class="c-option__title">微信号</div>
+                            <div class="c-option__body">
+                                <input type="text" name="wechat" readonly maxlength="30" placeholder="请输入微信号" value="{$data.nickname}">
+                            </div>
+
+                        </a>
+                        <!--
+                        <a class="o-list__item c-option o-list__item--last-border">
+                            <div class="c-option__title">支付宝</div>
+                            <div class="c-option__body">未绑定</div>
+                        </a>
+                    -->
+                    </div>
+                    <li class="o-list__item c-option">
+                        <div class="c-option__title">修改手机号</div>
+                        <div class="c-option__body">
+                            <input type="text" name="mobile" maxlength="30" placeholder="请输入手机号" value="{$data.mobile}">
+                        </div>
+                        <!--<div class="c-option__ending"><i class="o-icon-arrow--right"></i></div>-->
+                    </li>
+                </ul>
+                <div class="o-btn-container">
+                    <button id="submitCustomer" class="o-btn o-btn--block o-btn--h44 o-btn--rounded o-btn--primary" type="submit">保存</button>
+                    <!-- <button class="o-btn o-btn&#45;&#45;block o-btn&#45;&#45;h44 o-btn&#45;&#45;rounded o-btn&#45;&#45;danger" id="submitDanger">注销</button>-->
+                </div>
+                <input type="hidden" value="{$data.id}" name="id">
+            </form>
+            <span></span>
+        </div>
+    </div>
+    <!--导航菜单-->
+    <div class="navin">
+        <div class="floating-nav-container" style="z-index: 99">
+            <div class="nav-items">
+                <div class="item"><a href="{:U('shop/index')}"><i class="icon icon-menu"></i>首页</a></div>
+                <div class="item"><a href="{:U('Customer/lists')}"><i class="icon icon-personal"></i>个人中心</a></div>
+                <div class="item"><a href="{:U('Shop/lists/eat_type/1')}"><i class="icon icon-card"></i>堂食</a></div>
+                <div class="item"><a href="{:U('Shop/lists/eat_type/2')}"><i class="icon icon-order-list"></i>外带</a></div>
+            </div>
+            <div class="expand-control">
+                <button style="z-index: 100"><span class="navText">快速导航</span><i class="icon iconI icon-double-arrow-right"></i></button>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="__PUBLIC__/plugins/jquery-weui/lib/jquery-2.1.4.js"></script>
+<script src="__PUBLIC__/plugins/jquery-weui/lib/fastclick.js"></script>
+<script src="__PUBLIC__/plugins/jquery-weui/js/jquery-weui.js"></script>
+<script src="__PUBLIC__/index/js/action.js"></script>
+</body>
+</html>
